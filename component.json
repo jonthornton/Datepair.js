@@ -1,0 +1,17 @@
+{
+    "name"         : "datepair",
+    "version"      : "0.1",
+    "description"  : "A jQuery plugin for intelligently selecting date and time ranges inspired by Google Calendar.",
+    "homepage"     : "http://jonthornton.github.com/jquery-datepair",
+    "main"         : [ "./jquery.datepair.js", "./jquery.datepair.min.js", "./jquery.datepair.css" ],
+    "dependencies" : {
+        "jquery" : ">= 1.7",
+        "jt.timepicker" : ">=1.0"
+    },
+    "keywords"     : [ "timepicker", "datepicker", "time", "date", "picker", "ui", "calendar", "input", "form", "google calendar" ],
+    "author" : {
+		"name" : "Jon Thornton",
+		"web"  : "https://github.com/jonthornton"
+    },
+    "license": "http://opensource.org/licenses/MIT"
+}
