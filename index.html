@@ -7,11 +7,14 @@
   <meta name="description" content="A jQuery plugin for intelligently selecting date and time ranges inspired by Google Calendar." />
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-  <script type="text/javascript" src="https://raw.github.com/jonthornton/jquery-timepicker/master/jquery.timepicker.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://raw.github.com/jonthornton/jquery-timepicker/master/jquery.timepicker.css" />
+  <script type="text/javascript" src="http://jonthornton.github.io/jquery-timepicker/jquery.timepicker.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jonthornton.github.io/jquery-timepicker/jquery.timepicker.css" />
 
   <script type="text/javascript" src="lib/base.js"></script>
   <link rel="stylesheet" type="text/css" href="lib/base.css" />
+
+
+  <script type="text/javascript" src="jquery.datepair.js"></script>
 
 </head>
 
@@ -34,16 +37,34 @@
 
 
 	<div class="example">
-		<script src="lib/datepair.js"></script>
 		<h3>Example</h3>
 
-		<p class="datepair" data-language="javascript">
+		<p id="example">
 			<input type="text" class="date start" />
 			<input type="text" class="time start" /> to
 			<input type="text" class="time end" />
 			<input type="text" class="date end" />
 		</p>
 	</div>
+
+	<script>
+		$('#example').datepair();
+
+		$('#example .time').timepicker({
+			'showDuration': true,
+			'timeFormat': 'g:ia',
+			'scrollDefaultNow': true
+		});
+
+		$('#example .date').datepicker({
+			'format': 'yyyy-m-d',
+			'autoclose': true
+		});
+
+		// if ($input.hasClass('end')) {
+		// 	$input.on('datepair.focus', function(){$('.ui-timepicker-with-duration').scrollTop(0);});
+		// }
+	</script>
 
 
 	<div class="example" style="background: #ffd;">
