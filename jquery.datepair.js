@@ -15,7 +15,7 @@ requires jQuery 1.7+
 		factory(jQuery);
 	}
 }(function ($) {
-	var _ONE_DAY = 86400;
+	var _ONE_DAY = 86400000;
 	var _defaults =	{
 		startClass: 'start',
 		endClass: 'end',
@@ -33,6 +33,9 @@ requires jQuery 1.7+
 		updateDate: function($input, dateObj){
 			$input.val(dateObj.format('Y-n-j'));
 			$input.datepicker('update');
+		},
+		updateTime: function($input, dateObj){
+			$input.timepicker('setTime', dateObj);
 		}
 	};
 
@@ -189,7 +192,7 @@ requires jQuery 1.7+
 		var $endTimeInput = _getEndTimeInput($self);
 
 		var startTime;
-		if ($self.data('datepair-datedelta') + $self.data('datepair-timedelta') <= 86400000) {
+		if ($self.data('datepair-datedelta') <= _ONE_DAY) {
 			var startTime = settings.parseTime($startTimeInput);
 		}
 
@@ -211,21 +214,26 @@ requires jQuery 1.7+
 			$self.data('datepair-timedelta', 0);
 		}
 
-
-		var startTime = settings.parseDate($startTimeInput);
-		var endTime = settings.parseDate($endTimeInput);
+		var startTime = settings.parseTime($startTimeInput);
+		var endTime = settings.parseTime($endTimeInput);
 
 		if ($target.hasClass(settings.startClass)) {
 			var newEndTime = new Date(startTime.getTime()+$self.data('datepair-timedelta'));
 			settings.updateTime($endTimeInput, newEndTime);
-		} else if ($target.hasClass(settings.endClass)) {
-			if (endTime < startTime) {
-				$self.data('datepair-timedelta', 0);
-				settings.updateTime($startTimeInput, endDate);
-			} else {
-				$self.data('datepair-timedelta', endTime.getTime() - startTime.getTime());
-			}
+			endTime = settings.parseTime($endTimeInput);
 		}
+
+		if ((endTime.getTime() - startTime.getTime()) * $self.data('datepair-timedelta') < 0) {
+			var $endDateInput = _getEndDateInput($self);
+			var endDate = settings.parseDate($endDateInput);
+			var offset = (endTime < startTime) ? _ONE_DAY : -1 * _ONE_DAY;
+
+			settings.updateDate($endDateInput, new Date(endDate.getTime() + offset));
+			var newDelta = $self.data('datepair-timedelta') + offset;
+			$self.data('datepair-timedelta', newDelta);
+		}
+
+		$self.data('datepair-timedelta', endTime.getTime() - startTime.getTime());
 
 		_updateEndMintime($self);
 	}
