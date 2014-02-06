@@ -25,7 +25,7 @@ requires jQuery 1.7+
 			return $timeInput.timepicker('getTime');
 		},
 		parseDate: function($dateInput){
-			return $dateInput.data('datepicker').date;
+			return ($dateInput.data('datepicker').date != null ? $dateInput.data('datepicker').date : $dateInput.data('datepicker').viewDate);
 		},
 		setMinTime: function($input, dateObj){
 			$input.timepicker('option', 'minTime', dateObj);
