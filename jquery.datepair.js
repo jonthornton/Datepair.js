@@ -55,7 +55,8 @@ requires jQuery 1.7+
 				settings = _parseSettings(settings);
 
 				self.data('datepair-settings', settings);
-				self.on('change.datepair', null, _inputChanged);
+				self.on('changeDate.datepair', null, _inputChanged);
+				self.on('changeTime.datepair', null, _inputChanged);
 
 				// initialize datepair-datedelta and datepair-timedelta
 			});
