@@ -31,7 +31,7 @@ requires jQuery 1.7+
 			$input.timepicker('option', 'minTime', dateObj);
 		},
 		updateDate: function($input, dateObj){
-			$input.data('datepicker').setDate(dateObj);
+			$input.data('datepicker').setUTCDate(dateObj);
 		},
 		updateTime: function($input, dateObj){
 			$input.timepicker('setTime', dateObj);
