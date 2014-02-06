@@ -25,14 +25,13 @@ requires jQuery 1.7+
 			return $timeInput.timepicker('getTime');
 		},
 		parseDate: function($dateInput){
-			return parseDate($dateInput.val());
+			return $dateInput.data('datepicker').date;
 		},
 		setMinTime: function($input, dateObj){
 			$input.timepicker('option', 'minTime', dateObj);
 		},
 		updateDate: function($input, dateObj){
-			$input.val(dateObj.format('Y-n-j'));
-			$input.datepicker('update');
+			$input.data('datepicker').setDate(dateObj);
 		},
 		updateTime: function($input, dateObj){
 			$input.timepicker('setTime', dateObj);
