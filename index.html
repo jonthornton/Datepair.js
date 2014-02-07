@@ -10,7 +10,9 @@
   <script type="text/javascript" src="http://jonthornton.github.io/jquery-timepicker/jquery.timepicker.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jonthornton.github.io/jquery-timepicker/jquery.timepicker.css" />
 
-  <script type="text/javascript" src="lib/base.js"></script>
+  <script type="text/javascript" src="lib/bootstrap-datepicker.js"></script>
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap-datepicker.css" />
+
   <link rel="stylesheet" type="text/css" href="lib/base.css" />
 
 
@@ -48,18 +50,18 @@
 	</div>
 
 	<script>
-		$('#example').datepair();
 
 		$('#example .time').timepicker({
 			'showDuration': true,
-			'timeFormat': 'g:ia',
-			'scrollDefaultNow': true
+			'timeFormat': 'g:ia'
 		});
 
 		$('#example .date').datepicker({
 			'format': 'yyyy-m-d',
 			'autoclose': true
 		});
+
+		$('#example').datepair();
 
 		// if ($input.hasClass('end')) {
 		// 	$input.on('datepair.focus', function(){$('.ui-timepicker-with-duration').scrollTop(0);});
