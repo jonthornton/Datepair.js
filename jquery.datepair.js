@@ -25,14 +25,13 @@ requires jQuery 1.7+
 			return $timeInput.timepicker('getTime');
 		},
 		parseDate: function($dateInput){
-			return parseDate($dateInput.val());
+			return ($dateInput.data('datepicker').date != null ? $dateInput.data('datepicker').date : $dateInput.data('datepicker').viewDate);
 		},
 		setMinTime: function($input, dateObj){
 			$input.timepicker('option', 'minTime', dateObj);
 		},
 		updateDate: function($input, dateObj){
-			$input.val(dateObj.format('Y-n-j'));
-			$input.datepicker('update');
+			$input.data('datepicker').setUTCDate(dateObj);
 		},
 		updateTime: function($input, dateObj){
 			$input.timepicker('setTime', dateObj);
@@ -56,7 +55,8 @@ requires jQuery 1.7+
 				settings = _parseSettings(settings);
 
 				self.data('datepair-settings', settings);
-				self.on('change.datepair', null, _inputChanged);
+				self.on('changeDate.datepair', null, _inputChanged);
+				self.on('changeTime.datepair', null, _inputChanged);
 
 				// initialize datepair-datedelta and datepair-timedelta
 			});
