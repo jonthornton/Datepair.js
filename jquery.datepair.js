@@ -21,6 +21,8 @@ requires jQuery 1.7+
 		endClass: 'end',
 		timeClass: 'time',
 		dateClass: 'date',
+		defaultDateDelta: 1,
+		defaultTimeDelta: 3600000,
 		parseTime: function($timeInput){
 			return $timeInput.timepicker('getTime');
 		},
@@ -61,9 +63,7 @@ requires jQuery 1.7+
 				var $startDateInput = _getStartDateInput($self);
 				var $endDateInput = _getEndDateInput($self);
 
-				if (!$startDateInput.val() || !$endDateInput.val()) {
-					$self.data('datepair-datedelta', 0);
-				} else {
+				if ($startDateInput.val() && $endDateInput.val()) {
 					var startDate = settings.parseDate($startDateInput);
 					var endDate = settings.parseDate($endDateInput);
 					$self.data('datepair-datedelta', endDate.getTime() - startDate.getTime());
@@ -73,9 +73,7 @@ requires jQuery 1.7+
 				var $startTimeInput = _getStartTimeInput($self);
 				var $endTimeInput = _getEndTimeInput($self);
 
-				if (!$startTimeInput.val() || !$endTimeInput.val()) {
-					$self.data('datepair-timedelta', 0);
-				} else {
+				if ($startTimeInput.val() && $endTimeInput.val()) {
 					var startTime = settings.parseTime($startTimeInput);
 					var endTime = settings.parseTime($endTimeInput);
 					$self.data('datepair-timedelta', endTime.getTime() - startTime.getTime());
@@ -176,14 +174,22 @@ requires jQuery 1.7+
 		var $endDateInput = _getEndDateInput($self);
 
 		if (!$startDateInput.val() || !$endDateInput.val()) {
-			if ($startDateInput.val()) {
-				settings.updateDate($endDateInput, settings.parseDate($startDateInput));
-			} else if ($endDateInput.val()) {
-				settings.updateDate($startDateInput, settings.parseDate($endDateInput));
+			if (settings.defaultDateDelta !== null) {
+				if ($startDateInput.val()) {
+					var startDate = settings.parseDate($startDateInput);
+					var newEnd = new Date(startDate.getTime() + settings.defaultDateDelta * _ONE_DAY);
+					settings.updateDate($endDateInput, newEnd);
+				} else if ($endDateInput.val()) {
+					var endDate = settings.parseDate($endDateInput);
+					var newStart = new Date(endDate.getTime() + settings.defaultDateDelta * _ONE_DAY);
+					settings.updateDate($startDateInput, newStart);
+				}
+
+				$self.data('datepair-datedelta', settings.defaultDateDelta * _ONE_DAY);
+			} else {
+				$self.data('datepair-datedelta', null);
 			}
 
-
-			$self.data('datepair-datedelta', 0);
 			_updateEndMintime($self);
 			return;
 		}
@@ -228,7 +234,22 @@ requires jQuery 1.7+
 		var $endTimeInput = _getEndTimeInput($self);
 
 		if (!$startTimeInput.val() || !$endTimeInput.val()) {
-			$self.data('datepair-timedelta', 0);
+			if (settings.defaultTimeDelta !== null) {
+				if ($startTimeInput.val()) {
+					var startTime = settings.parseTime($startTimeInput);
+					var newEnd = new Date(startTime.getTime() + settings.defaultTimeDelta);
+					settings.updateTime($endTimeInput, newEnd);
+				} else if ($endTimeInput.val()) {
+					var endTime = settings.parseTime($endTimeInput);
+					var newStart = new Date(endDate.getTime() + settings.defaultTimeDelta);
+					settings.updateTime($startTimeInput, newStart);
+				}
+
+				$self.data('datepair-timedelta', settings.defaultTimeDelta);
+			} else {
+				$self.data('datepair-timedelta', null);
+			}
+
 			_updateEndMintime($self);
 			return;
 		}
