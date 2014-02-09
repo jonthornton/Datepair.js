@@ -21,7 +21,7 @@ requires jQuery 1.7+
 		endClass: 'end',
 		timeClass: 'time',
 		dateClass: 'date',
-		defaultDateDelta: 1,
+		defaultDateDelta: 0,
 		defaultTimeDelta: 3600000,
 		parseTime: function($timeInput){
 			return $timeInput.timepicker('getTime');
