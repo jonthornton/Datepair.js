@@ -23,20 +23,20 @@ requires jQuery 1.7+
 		dateClass: 'date',
 		defaultDateDelta: 0,
 		defaultTimeDelta: 3600000,
-		parseTime: function($timeInput){
-			return $timeInput.timepicker('getTime');
+		parseTime: function($input){
+			return $input.timepicker('getTime');
 		},
-		parseDate: function($dateInput){
-			return $dateInput.datepicker('getDate');
+		updateTime: function($input, dateObj){
+			$input.timepicker('setTime', dateObj);
 		},
-		setMinTime: function($input, dateObj){
-			$input.timepicker('option', 'minTime', dateObj);
+		parseDate: function($input){
+			return $input.datepicker('getDate');
 		},
 		updateDate: function($input, dateObj){
 			$input.datepicker('update', dateObj);
 		},
-		updateTime: function($input, dateObj){
-			$input.timepicker('setTime', dateObj);
+		setMinTime: function($input, dateObj){
+			$input.timepicker('option', 'minTime', dateObj);
 		}
 	};
 
@@ -215,6 +215,8 @@ requires jQuery 1.7+
 	function _updateEndMintime($self)
 	{
 		var settings = $self.data('datepair-settings');
+		if (typeof settings.setMinTime != 'function') return;
+
 		var $startTimeInput = _getStartTimeInput($self);
 		var $endTimeInput = _getEndTimeInput($self);
 

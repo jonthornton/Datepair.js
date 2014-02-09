@@ -35,6 +35,8 @@ hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
 
 div.ui-datepicker { font-size: 11px; }
 
+#alternateUiWidgetsExample .date { width: 120px; }
+
 /**
  * Blackboard theme
  *

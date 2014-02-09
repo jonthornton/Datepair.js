@@ -16,6 +16,11 @@
     <script src="lib/pikaday.js"></script>
     <link rel="stylesheet" type="text/css" href="lib/pikaday.css" />
 
+    <script src="lib/jquery.ptTimeSelect.js"></script>
+    <link rel="stylesheet" type="text/css" href="lib/jquery.ptTimeSelect.css" />
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css" type="text/css" media="all" />
+
+    <script src="lib/moment.min.js"></script>
     <script src="lib/base.js"></script>
     <link rel="stylesheet" type="text/css" href="lib/base.css" />
 
@@ -51,6 +56,13 @@
         </p>
 
         <pre class="code" data-language="javascript">
+&lt;p id="basicExample"&gt;
+    &lt;input type="text" class="date start" /&gt;
+    &lt;input type="text" class="time start" /&gt; to
+    &lt;input type="text" class="time end" /&gt;
+    &lt;input type="text" class="date end" /&gt;
+&lt;/p&gt;
+
 &lt;script type="text/javascript" src="bootstrap-datepicker.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript" src="jquery.timepicker.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript" src="jquery.datepair.js"&gt;&lt;/script&gt;
@@ -136,38 +148,66 @@ $('#defaultDeltaExample').datepair({
         </p>
 
         <pre class="code" data-language="javascript">
-&lt;script type="text/javascript" src="bootstrap-datepicker.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript" src="jquery.timepicker.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript" src="glDatePicker.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="pikaday.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="jquery.ptTimeSelect.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="moment.js"&gt;&lt;/script&gt;
 &lt;script&gt;
-    // initialize input widgets first
-    $('#alternateUiWidgetsExample .time').timepicker({
-        'showDuration': true,
-        'timeFormat': 'g:ia'
+    // initialize input widgets
+    // ptTimeSelect doesn't trigger change event by default
+    $('#alternateUiWidgetsExample .time').ptTimeSelect({
+        'onClose': function($self) {
+            $self.trigger('change');
+        }
     });
 
-    $('#alternateUiWidgetsExample .date').datepicker({
-        'format': 'yyyy-m-d',
-        'autoclose': true
-    });
+    $('#alternateUiWidgetsExample .date').pikaday();
 
-    // initialize datepair
-    $('#alternateUiWidgetsExample').datepair();
+    var TIMEFORMAT = 'h:mm a';
+    $('#alternateUiWidgetsExample').datepair({
+        parseTime: function($input){
+            // use moment.js to parse time
+            var m = moment($input.val(), TIMEFORMAT);
+            return m.toDate();
+        },
+        updateTime: function($input, dateObj){
+            var m = moment(dateObj);
+            $input.val(m.format(TIMEFORMAT));
+        },
+        parseDate: function($input){
+            var picker = $input.data('pikaday');
+            return picker.getDate();
+        },
+        updateDate: function($input, dateObj){
+            var picker = $input.data('pikaday');
+            return picker.setDate(dateObj);
+        }
+    });
 &lt;/script&gt;
         </pre>
     </div>
 
     <script>
-        $('#alternateUiWidgetsExample .time').timepicker({
-            'showDuration': true,
-            'timeFormat': 'g:ia'
+        // initialize input widgets
+        // ptTimeSelect doesn't trigger change event by default
+        $('#alternateUiWidgetsExample .time').ptTimeSelect({
+            'onClose': function($self) {
+                $self.trigger('change');
+            }
         });
 
-        $('#alternateUiWidgetsExample .date').pikaday({
+        $('#alternateUiWidgetsExample .date').pikaday();
 
-        });
-
+        var TIMEFORMAT = 'h:mm a';
         $('#alternateUiWidgetsExample').datepair({
+            parseTime: function($input){
+                // use moment.js to parse time
+                var m = moment($input.val(), TIMEFORMAT);
+                return m.toDate();
+            },
+            updateTime: function($input, dateObj){
+                var m = moment(dateObj);
+                $input.val(m.format(TIMEFORMAT));
+            },
             parseDate: function($input){
                 var picker = $input.data('pikaday');
                 return picker.getDate();
@@ -175,7 +215,7 @@ $('#defaultDeltaExample').datepair({
             updateDate: function($input, dateObj){
                 var picker = $input.data('pikaday');
                 return picker.setDate(dateObj);
-            },
+            }
         });
     </script>
 
