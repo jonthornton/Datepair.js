@@ -1,4 +1,4 @@
-Datepicker Plugin for jQuery
+Datepair Plugin for jQuery
 ========================
 
 [See a demo and examples here](http://jonthornton.github.com/jquery-datepair)
