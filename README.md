@@ -5,6 +5,8 @@ Datepair Plugin for jQuery
 
 jquery.datepair is a lightweight jQuery plugin for intelligently selecting date and time ranges, inspired by Google Calendar.
 
+**This plugin is v0.1.0 and under active development. API may change without warning.**
+
 Requirements
 ------------
 * [jQuery](http://jquery.com/) (>= 1.7)
