@@ -217,14 +217,13 @@ requires jQuery 1.7+
 		var settings = $self.data('datepair-settings');
 		if (typeof settings.setMinTime != 'function') return;
 
-		var $startTimeInput = _getStartTimeInput($self);
-		var $endTimeInput = _getEndTimeInput($self);
-
 		var startTime;
-		if ($self.data('datepair-datedelta') <= _ONE_DAY) {
+		if ($self.data('datepair-datedelta') <= _ONE_DAY || !$self.data('datepair-datedelta')) {
+			var $startTimeInput = _getStartTimeInput($self);
 			var startTime = settings.parseTime($startTimeInput);
 		}
 
+		var $endTimeInput = _getEndTimeInput($self);
 		settings.setMinTime($endTimeInput, startTime);
 	}
 

@@ -99,6 +99,54 @@
     </script>
 
     <div class="example">
+        <h3>Date-only Example</h3>
+
+        <p>You can use datepair with just dates, or just times.</p>
+
+        <p id="dateOnlyExample">
+            <input type="text" class="date start" /> to
+            <input type="text" class="date end" />
+        </p>
+
+        <p id="timeOnlyExample">
+            <input type="text" class="time start" /> to
+            <input type="text" class="time end" />
+        </p>
+
+        <pre class="code" data-language="javascript">
+$('#timeOnlyExample .time').timepicker({
+    'showDuration': true,
+    'timeFormat': 'g:ia'
+});
+
+$('#timeOnlyExample').datepair();
+
+$('#dateOnlyExample .date').datepicker({
+    'format': 'yyyy-m-d',
+    'autoclose': true
+});
+
+$('#dateOnlyExample').datepair();
+        </pre>
+    </div>
+
+    <script>
+        $('#timeOnlyExample .time').timepicker({
+            'showDuration': true,
+            'timeFormat': 'g:ia'
+        });
+
+        $('#timeOnlyExample').datepair();
+
+        $('#dateOnlyExample .date').datepicker({
+            'format': 'yyyy-m-d',
+            'autoclose': true
+        });
+
+        $('#dateOnlyExample').datepair();
+    </script>
+
+    <div class="example">
         <h3>Default Delta Example</h3>
 
         <p>Datepair can automatically set the other input when a first value is selected.</p>
