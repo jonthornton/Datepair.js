@@ -57,7 +57,7 @@ requires jQuery 1.7+
 				settings = _parseSettings(settings);
 
 				$self.data('datepair-settings', settings);
-				$self.on('change.datepair', null, _inputChanged);
+				_bindChangeHandler($self);
 
 				// initialize datepair-datedelta
 				var $startDateInput = _getStartDateInput($self);
@@ -124,22 +124,37 @@ requires jQuery 1.7+
 		return settings;
 	}
 
+	function _bindChangeHandler($self)
+	{
+		$self.on('change.datepair', null, _inputChanged);
+	}
+
+	function _unbindChangeHandler($self)
+	{
+		$self.off('change.datepair');
+	}
+
 	function _inputChanged(e)
 	{
 		var $self = $(this);
+
+		// temporarily unbind the change handler to prevent triggering this
+		// if we update other inputs
+		_unbindChangeHandler($self);
+
 		var settings = $self.data('datepair-settings');
 		var $target = $(e.target);
 
-		if ($target.val() == '') {
-			return;
+		if ($target.val() != '') {
+			if ($target.hasClass(settings.dateClass)) {
+				_dateChanged($self, $target);
+
+			} else if ($target.hasClass(settings.timeClass)) {
+				_timeChanged($self, $target);
+			}
 		}
 
-		if ($target.hasClass(settings.dateClass)) {
-			_dateChanged($self, $target);
-
-		} else if ($target.hasClass(settings.timeClass)) {
-			_timeChanged($self, $target);
-		}
+		_bindChangeHandler($self);
 	}
 
 	function _getStartDateInput($self)
