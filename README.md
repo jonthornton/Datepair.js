@@ -70,6 +70,15 @@ A function that takes a jQuery element for a time input and a local time ```Date
 *default: function for [jquery-timepicker](https://github.com/jonthornton/jquery-datepicker)*
 
 
+Methods
+-------
+
+- **remove**  
+Unbind the datepair functionality from a set of inputs.  
+	```javascript
+	$('#container').datepair('remove');
+	```  
+
 Help
 ----
 

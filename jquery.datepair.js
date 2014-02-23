@@ -107,9 +107,11 @@ requires jQuery 1.7+
 
 		remove: function()
 		{
-			var self = this;
-			self.removeData('datepair-settings');
-			self.off('.timepicker');
+			var $self = this;
+			$self.removeData('datepair-settings');
+			_unbindChangeHandler($self)
+
+			return $self;
 		}
 	};
 
