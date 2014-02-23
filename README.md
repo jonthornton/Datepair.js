@@ -74,7 +74,8 @@ Methods
 -------
 
 - **remove**  
-Unbind the datepair functionality from a set of inputs.  
+Unbind the datepair functionality from a set of inputs. 
+
 	```javascript
 	$('#container').datepair('remove');
 	```  
