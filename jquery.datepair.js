@@ -210,7 +210,7 @@ requires jQuery 1.7+
 					settings.updateDate($endDateInput, newEnd);
 				} else if ($endDateInput.val()) {
 					var endDate = settings.parseDate($endDateInput);
-					var newStart = new Date(endDate.getTime() + settings.defaultDateDelta * _ONE_DAY);
+					var newStart = new Date(endDate.getTime() - settings.defaultDateDelta * _ONE_DAY);
 					settings.updateDate($startDateInput, newStart);
 				}
 
@@ -268,7 +268,7 @@ requires jQuery 1.7+
 					settings.updateTime($endTimeInput, newEnd);
 				} else if ($endTimeInput.val()) {
 					var endTime = settings.parseTime($endTimeInput);
-					var newStart = new Date(endDate.getTime() + settings.defaultTimeDelta);
+					var newStart = new Date(endTime.getTime() - settings.defaultTimeDelta);
 					settings.updateTime($startTimeInput, newStart);
 				}
 
