@@ -316,6 +316,8 @@ $('#eventsExample').datepair().on('rangeSelected', function(){
     $('#eventsExampleStatus').text('Valid range selected');
 }).on('rangeIncomplete', function(){
     $('#eventsExampleStatus').text('Incomplete range');
+}).on('rangeError', function(){
+    $('#eventsExampleStatus').text('Invalid range');
 });
             </pre>
 
@@ -334,6 +336,8 @@ $('#eventsExample').datepair().on('rangeSelected', function(){
                     $('#eventsExampleStatus').text('Valid range selected');
                 }).on('rangeIncomplete', function(){
                     $('#eventsExampleStatus').text('Incomplete range');
+                }).on('rangeError', function(){
+                    $('#eventsExampleStatus').text('Invalid range');
                 });
             </script>
         </article>

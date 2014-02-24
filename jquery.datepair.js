@@ -291,12 +291,12 @@ requires jQuery 1.7+
 
 		if ((endTime.getTime() - startTime.getTime()) * $self.data('datepair-timedelta') < 0) {
 			var $endDateInput = _getEndDateInput($self);
-			var endDate = settings.parseDate($endDateInput);
-			var offset = (endTime < startTime) ? _ONE_DAY : -1 * _ONE_DAY;
-
-			settings.updateDate($endDateInput, new Date(endDate.getTime() + offset));
-			var newDelta = $self.data('datepair-timedelta') + offset;
-			$self.data('datepair-timedelta', newDelta);
+			if ($endDateInput.val()) {
+				var offset = (endTime < startTime) ? _ONE_DAY : -1 * _ONE_DAY;
+				var endDate = settings.parseDate($endDateInput);
+				settings.updateDate($endDateInput, new Date(endDate.getTime() + offset));
+				_dateChanged($self, $endDateInput);
+			}
 		}
 
 		$self.data('datepair-timedelta', endTime.getTime() - startTime.getTime());
@@ -319,7 +319,11 @@ requires jQuery 1.7+
 			return;
 		}
 
-		$self.trigger('rangeSelected');
+		if ($self.data('datepair-datedelta') + $self.data('datepair-timedelta') >= 0) {
+			$self.trigger('rangeSelected');
+		} else {
+			$self.trigger('rangeError');
+		}
 	}
 
 
