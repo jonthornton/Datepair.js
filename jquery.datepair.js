@@ -67,6 +67,8 @@ requires jQuery 1.7+
 					var startDate = settings.parseDate($startDateInput);
 					var endDate = settings.parseDate($endDateInput);
 					$self.data('datepair-datedelta', endDate.getTime() - startDate.getTime());
+				} else {
+					$self.data('datepair-datedelta', null);
 				}
 
 				// initialize datepair-timedelta
@@ -77,6 +79,8 @@ requires jQuery 1.7+
 					var startTime = settings.parseTime($startTimeInput);
 					var endTime = settings.parseTime($endTimeInput);
 					$self.data('datepair-timedelta', endTime.getTime() - startTime.getTime());
+				} else {
+					$self.data('datepair-timedelta', null);
 				}
 
 				_updateEndMintime($self);
@@ -147,15 +151,23 @@ requires jQuery 1.7+
 		var settings = $self.data('datepair-settings');
 		var $target = $(e.target);
 
-		if ($target.val() != '') {
-			if ($target.hasClass(settings.dateClass)) {
+		if ($target.hasClass(settings.dateClass)) {
+			if ($target.val() != '') {
 				_dateChanged($self, $target);
+			} else {
+				$self.data('datepair-datedelta', null);
+			}
 
-			} else if ($target.hasClass(settings.timeClass)) {
+		} else if ($target.hasClass(settings.timeClass)) {
+			if ($target.val() != '') {
 				_timeChanged($self, $target);
+			} else {
+				$self.data('datepair-timedelta', null);
 			}
 		}
 
+		_validateRanges($self);
+		_updateEndMintime($self)
 		_bindChangeHandler($self);
 	}
 
@@ -207,7 +219,6 @@ requires jQuery 1.7+
 				$self.data('datepair-datedelta', null);
 			}
 
-			_updateEndMintime($self);
 			return;
 		}
 
@@ -225,8 +236,6 @@ requires jQuery 1.7+
 				$self.data('datepair-datedelta', endDate.getTime() - startDate.getTime());
 			}
 		}
-
-		_updateEndMintime($self);
 	}
 
 	function _updateEndMintime($self)
@@ -268,7 +277,6 @@ requires jQuery 1.7+
 				$self.data('datepair-timedelta', null);
 			}
 
-			_updateEndMintime($self);
 			return;
 		}
 
@@ -292,8 +300,26 @@ requires jQuery 1.7+
 		}
 
 		$self.data('datepair-timedelta', endTime.getTime() - startTime.getTime());
+	}
 
-		_updateEndMintime($self);
+	function _validateRanges($self)
+	{
+		var $startTimeInput = _getStartTimeInput($self);
+		var $endTimeInput = _getEndTimeInput($self);
+
+		if ($startTimeInput.length && $endTimeInput.length && $self.data('datepair-timedelta') === null) {
+			$self.trigger('rangeIncomplete');
+			return;
+		}
+
+		var $startDateInput = _getStartDateInput($self);
+		var $endDateInput = _getEndDateInput($self);
+		if ($startDateInput.length && $endDateInput.length && $self.data('datepair-datedelta') === null) {
+			$self.trigger('rangeIncomplete');
+			return;
+		}
+
+		$self.trigger('rangeSelected');
 	}
 
 

@@ -80,6 +80,15 @@ Unbind the datepair functionality from a set of inputs.
 	$('#container').datepair('remove');
 	```  
 
+Events
+------
+
+- **rangeIncomplete**  
+Fired after the user interacts with the datepair inputs but one or more empty inputs remain. Unpaired inputs (such as a start date with no corresponding end date) will not be taken into account.
+
+- **rangeSelected**  
+Fired after the user interacts with the datepair inputs and all paired inputs have valid values.
+
 Help
 ----
 

@@ -122,6 +122,8 @@
             </div>
 
             <pre class="code" data-language="javascript">
+// HTML not shown for brevity
+
 $('#timeOnlyExample .time').timepicker({
     'showDuration': true,
     'timeFormat': 'g:ia'
@@ -169,6 +171,8 @@ $('#dateOnlyExample').datepair();
             </div>
 
             <pre class="code" data-language="javascript">
+// HTML not shown for brevity
+
 $('#defaultDeltaExample').datepair({
     'defaultDateDelta': 1,      // days
     'defaultTimeDelta': 7200000 // milliseconds
@@ -275,6 +279,61 @@ $('#defaultDeltaExample').datepair({
                         var picker = $input.data('pikaday');
                         return picker.setDate(dateObj);
                     }
+                });
+            </script>
+        </article>
+
+        <article>
+            <div class="demo">
+                <h2>Events Example</h2>
+                <p>Datepair fires several events to indicate the status of the inputs.</p>
+
+                <p id="eventsExample">
+                    <input type="text" class="date start" />
+                    <input type="text" class="time start" /> to
+                    <input type="text" class="time end" />
+                    <input type="text" class="date end" />
+                </p>
+
+                <p id="eventsExampleStatus"></p>
+            </div>
+
+            <pre class="code" data-language="javascript">
+// HTML not shown for brevity
+
+// initialize input widgets first
+$('#eventsExample .time').timepicker({
+    'showDuration': true,
+    'timeFormat': 'g:ia'
+});
+
+$('#eventsExample .date').datepicker({
+    'format': 'm/d/yyyy',
+    'autoclose': true
+});
+
+$('#eventsExample').datepair().on('rangeSelected', function(){
+    $('#eventsExampleStatus').text('Valid range selected');
+}).on('rangeIncomplete', function(){
+    $('#eventsExampleStatus').text('Incomplete range');
+});
+            </pre>
+
+            <script>
+                $('#eventsExample .time').timepicker({
+                    'showDuration': true,
+                    'timeFormat': 'g:ia'
+                });
+
+                $('#eventsExample .date').datepicker({
+                    'format': 'm/d/yyyy',
+                    'autoclose': true
+                });
+
+                $('#eventsExample').datepair().on('rangeSelected', function(){
+                    $('#eventsExampleStatus').text('Valid range selected');
+                }).on('rangeIncomplete', function(){
+                    $('#eventsExampleStatus').text('Incomplete range');
                 });
             </script>
         </article>
