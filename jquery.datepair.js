@@ -249,7 +249,7 @@ requires jQuery 1.7+
 			var $startTimeInput = _getStartTimeInput($self);
 			startTime = settings.parseTime($startTimeInput);
 		}
-console.log(startTime);
+
 		var $endTimeInput = _getEndTimeInput($self);
 		settings.setMinTime($endTimeInput, startTime);
 	}
