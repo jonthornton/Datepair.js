@@ -243,12 +243,13 @@ requires jQuery 1.7+
 		var settings = $self.data('datepair-settings');
 		if (typeof settings.setMinTime != 'function') return;
 
-		var startTime;
-		if ($self.data('datepair-datedelta') <= _ONE_DAY || !$self.data('datepair-datedelta')) {
+		var startTime = null;
+		if (!$self.data('datepair-datedelta') || $self.data('datepair-datedelta') < _ONE_DAY
+				|| ($self.data('datepair-timedelta') && $self.data('datepair-datedelta') + $self.data('datepair-timedelta') < _ONE_DAY)) {
 			var $startTimeInput = _getStartTimeInput($self);
-			var startTime = settings.parseTime($startTimeInput);
+			startTime = settings.parseTime($startTimeInput);
 		}
-
+console.log(startTime);
 		var $endTimeInput = _getEndTimeInput($self);
 		settings.setMinTime($endTimeInput, startTime);
 	}
