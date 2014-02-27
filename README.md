@@ -1,5 +1,4 @@
-Datepair Plugin for jQuery
-========================
+# Datepair Plugin for jQuery
 
 [See a demo and examples here](http://jonthornton.github.com/jquery-datepair)
 
@@ -7,14 +6,13 @@ jquery.datepair is a lightweight jQuery plugin for intelligently selecting date 
 
 **This plugin is v0.1.0 and under active development. API may change without warning.**
 
-Requirements
-------------
+## Requirements
+
 * [jQuery](http://jquery.com/) (>= 1.7)
 * [jquery-timepicker](https://github.com/jonthornton/jquery-datepicker) (>= 1.3) (this dependency can be overridden)
 * [Bootstrap Datepicker](https://github.com/eternicode/bootstrap-datepicker) (>= 1.3) (this dependency can be overridden)
 
-Usage
------
+## Usage
 
 ```javascript
 $('#container').datepair(options);
@@ -22,20 +20,7 @@ $('#container').datepair(options);
 
 Where ```#container``` contains time/date input elements with the appropriate class names. ```options``` is an optional javascript object with parameters explained below.
 
-Options
--------
-
-- **startClass**  
-Class name of the range start input(s).  
-*default: "start"*
-
-- **endClass**  
-Class name of the range end input(s).  
-*default: "end"*
-
-- **timeClass**  
-Class name of the time inputs, if any.  
-*default: "time"*
+## Options
 
 - **dateClass**  
 Class name of the date inputs, if any.  
@@ -49,29 +34,40 @@ Fill in the second date value with the specified range when the users selects th
 Fill in the second time value with the specified range when the users selects the first time. Value is in milliseconds; set this to ```7200000``` for a 2 hour range, for example. Set this to ```null``` to disable automatically setting the second time.  
 *default: 0*
 
-- **parseTime**  
-A function that takes a jQuery element for a time input and returns a local time ```Date``` object representing the time input value. See [example page](http://jonthornton.github.com/jquery-datepair) for more info.  
-*default: function for [jquery-timepicker](https://github.com/jonthornton/jquery-datepicker)*
-
-- **updateTime**  
-A function that takes a jQuery element for a time input and a local time ```Date``` object representing the time, and sets the input value.  
-*default: function for [jquery-timepicker](https://github.com/jonthornton/jquery-datepicker)*
+- **endClass**  
+Class name of the range end input(s).  
+*default: "end"*
 
 - **parseDate**  
 A function that takes a jQuery element for a date input and returns a local time ```Date``` object representing the date input value.  
 *default: function for [Bootstrap Datepicker](https://github.com/eternicode/bootstrap-datepicker)*
 
-- **updateDate**  
-A function that takes a jQuery element for a date input and a local time ```Date``` object representing the date, and sets the input value.  
-*default: function for [Bootstrap Datepicker](https://github.com/eternicode/bootstrap-datepicker)*
+- **parseTime**  
+A function that takes a jQuery element for a time input and returns a local time ```Date``` object representing the time input value. See [example page](http://jonthornton.github.com/jquery-datepair) for more info.  
+*default: function for [jquery-timepicker](https://github.com/jonthornton/jquery-datepicker)*
 
 - **setMinTime**  
 A function that takes a jQuery element for a time input and a local time ```Date``` object representing the time, and sets the timepicker minTime value.  
 *default: function for [jquery-timepicker](https://github.com/jonthornton/jquery-datepicker)*
 
+- **startClass**  
+Class name of the range start input(s).  
+*default: "start"*
 
-Methods
--------
+- **timeClass**  
+Class name of the time inputs, if any.  
+*default: "time"*
+
+- **updateDate**  
+A function that takes a jQuery element for a date input and a local time ```Date``` object representing the date, and sets the input value.  
+*default: function for [Bootstrap Datepicker](https://github.com/eternicode/bootstrap-datepicker)*
+
+- **updateTime**  
+A function that takes a jQuery element for a time input and a local time ```Date``` object representing the time, and sets the input value.  
+*default: function for [jquery-timepicker](https://github.com/jonthornton/jquery-datepicker)*
+
+
+## Methods
 
 - **remove**  
 Unbind the datepair functionality from a set of inputs. 
@@ -80,8 +76,7 @@ Unbind the datepair functionality from a set of inputs.
 	$('#container').datepair('remove');
 	```  
 
-Events
-------
+## Events
 
 - **rangeError**  
 Fired after the user interacts with the datepair inputs but selects an invalid range, where the end time/date is before the start.
@@ -92,13 +87,11 @@ Fired after the user interacts with the datepair inputs but one or more empty in
 - **rangeSelected**  
 Fired after the user interacts with the datepair inputs and all paired inputs have valid values.
 
-Help
-----
+## Help
 
 Submit a [GitHub Issues request](https://github.com/jonthornton/jquery-datepicker/issues/new).
 
-Development guidelines
-----------------------
+## Development Guidelines
 
 1. Install dependencies (jquery + grunt) `npm install`
 2. For sanity checks and minification run `grunt`, or just `grunt lint` to have the code linted
