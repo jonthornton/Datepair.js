@@ -109,6 +109,12 @@ requires jQuery 1.7+
 			return self;
 		},
 
+		getTimeDiff: function()
+		{
+			$self = this;
+			return $self.data('datepair-datedelta') * _ONE_DAY + $self.data('datepair-timedelta');
+		},
+
 		remove: function()
 		{
 			var $self = this;
@@ -202,6 +208,10 @@ requires jQuery 1.7+
 		var $startDateInput = _getStartDateInput($self);
 		var $endDateInput = _getEndDateInput($self);
 
+		if (!$startDateInput.length || !$endDateInput.length) {
+			return
+		}
+
 		if (!$startDateInput.val() || !$endDateInput.val()) {
 			if (settings.defaultDateDelta !== null) {
 				if ($startDateInput.val()) {
@@ -260,6 +270,10 @@ requires jQuery 1.7+
 
 		var $startTimeInput = _getStartTimeInput($self);
 		var $endTimeInput = _getEndTimeInput($self);
+
+		if (!$startTimeInput.length || !$endTimeInput.length) {
+			return
+		}
 
 		if (!$startTimeInput.val() || !$endTimeInput.val()) {
 			if (settings.defaultTimeDelta !== null) {

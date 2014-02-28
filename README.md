@@ -69,12 +69,19 @@ A function that takes a jQuery element for a time input and a local time ```Date
 
 ## Methods
 
+- **getTimeDiff**  
+Get the date/time range size, in milliseconds.
+
+	```javascript
+	var milliseconds = $('#container').datepair('getTimeDiff');
+	```
+
 - **remove**  
 Unbind the datepair functionality from a set of inputs. 
 
 	```javascript
 	$('#container').datepair('remove');
-	```  
+	```
 
 ## Events
 
