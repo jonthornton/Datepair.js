@@ -304,7 +304,8 @@ requires jQuery 1.7+
 			endTime = settings.parseTime($endTimeInput);
 		}
 
-		if ((endTime.getTime() - startTime.getTime()) * $self.data('datepair-timedelta') < 0) {
+		if ($self.data('datepair-datedelta') + $self.data('datepair-timedelta') < _ONE_DAY
+				&& (endTime.getTime() - startTime.getTime()) * $self.data('datepair-timedelta') < 0) {
 			var $endDateInput = _getEndDateInput($self);
 			if ($endDateInput.val()) {
 				var offset = (endTime < startTime) ? _ONE_DAY : -1 * _ONE_DAY;

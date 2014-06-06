@@ -51,6 +51,10 @@ header p {
     color: #888;
 }
 
+#header-links a:hover {
+    color: #06c;
+}
+
 h2 {
     color: #eee;
     font-size: 35px;
