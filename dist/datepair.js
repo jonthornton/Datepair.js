@@ -1,6 +1,6 @@
 /*!
- * datepair.js v0.1.1 - A jQuery plugin for intelligently selecting date and time ranges inspired by Google Calendar.
- * Copyright (c) 2014 Jon Thornton - http://jonthornton.github.com/jquery-datepair/
+ * datepair.js v0.1.1 - A javascript plugin for intelligently selecting date and time ranges inspired by Google Calendar.
+ * Copyright (c) 2014 Jon Thornton - http://jonthornton.github.com/Datepair.js
  * License: MIT
  */
 
@@ -23,15 +23,16 @@
     	return out;
     }
     
+    // IE's custom event support is totally borked.
+    // Use jQuery if possible
     function triggerSimpleCustomEvent(el, eventName) {
-    	if (window.CustomEvent) {
-    		var event = new CustomEvent(eventName);
+    	if (jq) {
+    		jq(el).trigger(eventName);
     	} else {
     		var event = document.createEvent('CustomEvent');
-    		event.initCustomEvent(eventName, true, true);
+    		event.initCustomEvent(eventName, true, true, {});
+    		el.dispatchEvent(event);
     	}
-    
-    	el.dispatchEvent(event);
     }
     
     // el.classList not supported by < IE10

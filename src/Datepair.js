@@ -13,15 +13,16 @@ function simpleExtend(obj1, obj2) {
 	return out;
 }
 
+// IE's custom event support is totally borked.
+// Use jQuery if possible
 function triggerSimpleCustomEvent(el, eventName) {
-	if (window.CustomEvent) {
-		var event = new CustomEvent(eventName);
+	if (jq) {
+		jq(el).trigger(eventName);
 	} else {
 		var event = document.createEvent('CustomEvent');
-		event.initCustomEvent(eventName, true, true);
+		event.initCustomEvent(eventName, true, true, {});
+		el.dispatchEvent(event);
 	}
-
-	el.dispatchEvent(event);
 }
 
 // el.classList not supported by < IE10
