@@ -8,6 +8,10 @@
         "name": "Jon Thornton",
         "url": "https://github.com/jonthornton"
     },
+    "repository": {
+        "type" : "git",
+        "url" : "https://github.com/jonthornton/Datepair.js.git"
+    },
     "license": "MIT",
     "devDependencies": {
         "grunt": "~0.4.1",
