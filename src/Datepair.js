@@ -1,3 +1,6 @@
+var _ONE_DAY = 86400000;
+var jq = window.Zepto || window.jQuery
+
 function simpleExtend(obj1, obj2) {
 	var out = obj2 || {};
 
@@ -21,7 +24,15 @@ function triggerSimpleCustomEvent(el, eventName) {
 	el.dispatchEvent(event);
 }
 
-var _ONE_DAY = 86400000;
+// el.classList not supported by < IE10
+// use jQuery if available
+function hasClass(el, className) {
+	if (jq) {
+		return jq(el).hasClass(className);
+	} else {
+		return el.classList.contains(className);
+	}
+}
 
 function Datepair(container, options) {
 	this.dateDelta = null;
@@ -36,21 +47,21 @@ function Datepair(container, options) {
 
 		// defaults for jquery-timepicker; override when using other input widgets
 		parseTime: function(input){
-			return jQuery(input).timepicker('getTime');
+			return jq(input).timepicker('getTime');
 		},
 		updateTime: function(input, dateObj){
-			jQuery(input).timepicker('setTime', dateObj);
+			jq(input).timepicker('setTime', dateObj);
 		},
 		setMinTime: function(input, dateObj){
-			jQuery(input).timepicker('option', 'minTime', dateObj);
+			jq(input).timepicker('option', 'minTime', dateObj);
 		},
 
 		// defaults for bootstrap datepicker; override when using other input widgets
 		parseDate: function(input){
-			return jQuery(input).datepicker('getDate');
+			return jq(input).datepicker('getDate');
 		},
 		updateDate: function(input, dateObj){
-			jQuery(input).datepicker('update', dateObj);
+			jq(input).datepicker('update', dateObj);
 		}
 	};
 
@@ -73,16 +84,16 @@ Datepair.prototype = {
 		// addEventListener doesn't work with synthetic "change" events
 		// fired by jQuery's trigger() functioin. If jQuery is present,
 		// use that for event binding
-		if (window.jQuery) {
-			jQuery(this.container).on('change.datepair', $.proxy(this.handleEvent, this));
+		if (jq) {
+			jq(this.container).on('change.datepair', jq.proxy(this.handleEvent, this));
 		} else {
 			this.container.addEventListener('change', this, false);
 		}
 	},
 
 	_unbindChangeHandler: function(){
-		if (window.jQuery) {
-			jQuery(this.container).off('change.datepair');
+		if (jq) {
+			jq(this.container).off('change.datepair');
 		} else {
 			this.container.removeEventListener('change', this, false);
 		}
@@ -93,14 +104,14 @@ Datepair.prototype = {
 		// if we update other inputs
 		this._unbindChangeHandler();
 
-		if (e.target.classList.contains(this.settings.dateClass)) {
+		if (hasClass(e.target, this.settings.dateClass)) {
 			if (e.target.value != '') {
 				this._dateChanged(e.target);
 			} else {
 				this.dateDelta = null;
 			}
 
-		} else if (e.target.classList.contains(this.settings.timeClass)) {
+		} else if (hasClass(e.target, this.settings.timeClass)) {
 			if (e.target.value != '') {
 				this._timeChanged(e.target);
 			} else {
@@ -142,10 +153,10 @@ Datepair.prototype = {
 		var startDate = this.settings.parseDate(this.startDateInput);
 		var endDate = this.settings.parseDate(this.endDateInput);
 
-		if (target.classList.contains(this.settings.startClass)) {
+		if (hasClass(target, this.settings.startClass)) {
 			var newEndDate = new Date(startDate.getTime() + this.dateDelta);
 			this.settings.updateDate(this.endDateInput, newEndDate);
-		} else if (target.classList.contains(this.settings.endClass)) {
+		} else if (hasClass(target, this.settings.endClass)) {
 			if (endDate < startDate) {
 				this.dateDelta = 0;
 				this.settings.updateDate(this.startDateInput, endDate);
@@ -183,7 +194,7 @@ Datepair.prototype = {
 		var startTime = this.settings.parseTime(this.startTimeInput);
 		var endTime = this.settings.parseTime(this.endTimeInput);
 
-		if (target.classList.contains(this.settings.startClass)) {
+		if (hasClass(target, this.settings.startClass)) {
 			var newEndTime = new Date(startTime.getTime() + this.timeDelta);
 			this.settings.updateTime(this.endTimeInput, newEndTime);
 			endTime = this.settings.parseTime(this.endTimeInput);
@@ -193,7 +204,7 @@ Datepair.prototype = {
 			var offset = (endTime < startTime) ? _ONE_DAY : -1 * _ONE_DAY;
 			var endDate = this.settings.parseDate(this.endDateInput);
 			this.settings.updateDate(this.endDateInput, new Date(endDate.getTime() + offset));
-			_dateChanged(this.endDateInput);
+			this._dateChanged(this.endDateInput);
 		}
 
 		this.timeDelta = endTime.getTime() - startTime.getTime();

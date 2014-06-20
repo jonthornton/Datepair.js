@@ -1,19 +1,19 @@
-# Datepair Plugin for jQuery
+# Datepair.js
 
 [See a demo and examples here](http://jonthornton.github.com/jquery-datepair)
 
-jquery.datepair is a lightweight jQuery plugin for intelligently selecting date and time ranges, inspired by Google Calendar. Datepair will keep the start and end date/times in sync and can set default values based on user action. The plugin does not provide any UI widgets; it's preconfigured to work with [jquery-timepicker](https://github.com/jonthornton/jquery-timepicker) and [Bootstrap Datepicker](https://github.com/eternicode/bootstrap-datepicker), but you can use it with any datepicker or timepicker (or none at all).
+Datepair.js is a lightweight, modular javascript plugin for intelligently selecting date and time ranges, inspired by Google Calendar. It will keep the start and end date/times in sync and can set default values based on user action. There are no external dependencies, however it can easily be used with jQuery or Zepto. The plugin does not provide any UI widgets; it's preconfigured to work with [jquery-timepicker](https://github.com/jonthornton/jquery-timepicker) and [Bootstrap Datepicker](https://github.com/eternicode/bootstrap-datepicker), but you can use it with any datepicker or timepicker (or none at all).
 
 ## Requirements
 
-* [jQuery](http://jquery.com/) (>= 1.7)
 * [jquery-timepicker](https://github.com/jonthornton/jquery-datepicker) (>= 1.3) (this dependency can be overridden)
 * [Bootstrap Datepicker](https://github.com/eternicode/bootstrap-datepicker) (>= 1.3) (this dependency can be overridden)
 
 ## Usage
 
 ```javascript
-$('#container').datepair(options);
+var container = document.getElementById('container')
+var datepair = new Datepair(container, options);
 ```
 
 Where ```#container``` contains time/date input elements with the appropriate class names. ```options``` is an optional javascript object with parameters explained below.
@@ -71,14 +71,14 @@ A function that takes a jQuery element for a time input and a local time ```Date
 Get the date/time range size, in milliseconds.
 
 	```javascript
-	var milliseconds = $('#container').datepair('getTimeDiff');
+	var milliseconds = datepair.getTimeDiff();
 	```
 
 - **remove**  
 Unbind the datepair functionality from a set of inputs. 
 
 	```javascript
-	$('#container').datepair('remove');
+	datepair.remove();
 	```
 
 ## Events
@@ -92,14 +92,27 @@ Fired after the user interacts with the datepair inputs but one or more empty in
 - **rangeSelected**  
 Fired after the user interacts with the datepair inputs and all paired inputs have valid values.
 
+## jQuery Plugin
+
+Datepair.js includes an optional jQuery interface that can simplify usage when working with jQuery or Zepto. To activate, include both `datepair.js` and `jquery.datepair.js`, or just `jquery.datepair.min.js`. (The minified version includes both scripts.)
+
+### Usage
+
+```javascript
+$('#container').datepair(options);
+var milliseconds = $('#container').datepair('getTimeDiff');
+$('#container').datepair('remove');
+```
+
 ## Help
 
 Submit a [GitHub Issues request](https://github.com/jonthornton/jquery-datepicker/issues/new).
 
 ## Development Guidelines
 
-1. Install dependencies (jquery + grunt) `npm install`
-2. For sanity checks and minification run `grunt`, or just `grunt lint` to have the code linted
+1. Install dependencies (grunt) `npm install`
+2. To build and minify, run `grunt`
+3. Use `grunt watch` to continuously build while developing
 
 - - -
 

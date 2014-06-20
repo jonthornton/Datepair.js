@@ -6,10 +6,7 @@ module.exports = function(grunt) {
             ' * <%= pkg.name %> v<%= pkg.version %> - <%= pkg.description %>\n' +
             ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %> - <%= pkg.homepage %>\n' +
             ' * License: <%= pkg.license %>\n' +
-            ' */\n\n',
-            outputDir: 'dist',
-            output: '<%= meta.outputDir %>/<%= pkg.name %>',
-            outputMin: '<%= meta.outputDir %>/<%= pkg.name.replace("js", "min.js") %>'
+            ' */\n\n'
         },
 
         rig: {
@@ -18,9 +15,8 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: {
-                    '<%= meta.output %>': ['src/wrapper.js'],
-                    // 'dist/jQuery.headroom.js' : ['src/jQuery.headroom.js'],
-                    // 'dist/angular.headroom.js' : ['src/angular.headroom.js']
+                    'dist/datepair.js': ['src/wrapper.js'],
+                    'dist/jquery.datepair.js' : ['src/jquery.datepair.js'],
                 }
             }
         },
@@ -32,7 +28,8 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: {
-                    '<%= meta.outputMin %>': '<%= meta.output %>',
+                    'dist/datepair.min.js': 'dist/datepair.js',
+                    'dist/jquery.datepair.min.js': ['dist/datepair.js', 'dist/jquery.datepair.js'],
                 }
             }
         },
