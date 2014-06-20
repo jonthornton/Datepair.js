@@ -24,7 +24,7 @@
     <script src="lib/site.js"></script>
     <link rel="stylesheet" type="text/css" href="lib/site.css" />
 
-    <script src="jquery.datepair.js"></script>
+    <script src="dist/datepair.js"></script>
 </head>
 
 <body>
@@ -100,7 +100,10 @@
                     'autoclose': true
                 });
 
-                $('#basicExample').datepair();
+                // $('#basicExample').datepair();
+                //
+                var basicExampleEl = document.getElementById('basicExample');
+                var datepair = new Datepair(basicExampleEl);
             </script>
         </article>
 
@@ -140,19 +143,19 @@ $('#dateOnlyExample').datepair();
             </pre>
 
             <script>
-                $('#timeOnlyExample .time').timepicker({
-                    'showDuration': true,
-                    'timeFormat': 'g:ia'
-                });
+                // $('#timeOnlyExample .time').timepicker({
+                //     'showDuration': true,
+                //     'timeFormat': 'g:ia'
+                // });
 
-                $('#timeOnlyExample').datepair();
+                // $('#timeOnlyExample').datepair();
 
-                $('#dateOnlyExample .date').datepicker({
-                    'format': 'yyyy-m-d',
-                    'autoclose': true
-                });
+                // $('#dateOnlyExample .date').datepicker({
+                //     'format': 'yyyy-m-d',
+                //     'autoclose': true
+                // });
 
-                $('#dateOnlyExample').datepair();
+                // $('#dateOnlyExample').datepair();
             </script>
         </article>
 
@@ -180,20 +183,20 @@ $('#defaultDeltaExample').datepair({
             </pre>
 
             <script>
-                $('#defaultDeltaExample .time').timepicker({
-                    'showDuration': true,
-                    'timeFormat': 'g:ia'
-                });
+                // $('#defaultDeltaExample .time').timepicker({
+                //     'showDuration': true,
+                //     'timeFormat': 'g:ia'
+                // });
 
-                $('#defaultDeltaExample .date').datepicker({
-                    'format': 'm/d/yyyy',
-                    'autoclose': true
-                });
+                // $('#defaultDeltaExample .date').datepicker({
+                //     'format': 'm/d/yyyy',
+                //     'autoclose': true
+                // });
 
-                $('#defaultDeltaExample').datepair({
-                    'defaultDateDelta': 1,
-                    'defaultTimeDelta': 7200000
-                });
+                // $('#defaultDeltaExample').datepair({
+                //     'defaultDateDelta': 1,
+                //     'defaultTimeDelta': 7200000
+                // });
             </script>
         </article>
 
@@ -252,34 +255,34 @@ $('#defaultDeltaExample').datepair({
             <script>
                 // initialize input widgets
                 // ptTimeSelect doesn't trigger change event by default
-                $('#alternateUiWidgetsExample .time').ptTimeSelect({
-                    'onClose': function($self) {
-                        $self.trigger('change');
-                    }
-                });
+                // $('#alternateUiWidgetsExample .time').ptTimeSelect({
+                //     'onClose': function($self) {
+                //         $self.trigger('change');
+                //     }
+                // });
 
-                $('#alternateUiWidgetsExample .date').pikaday();
+                // $('#alternateUiWidgetsExample .date').pikaday();
 
-                var TIMEFORMAT = 'h:mm a';
-                $('#alternateUiWidgetsExample').datepair({
-                    parseTime: function($input){
-                        // use moment.js to parse time
-                        var m = moment($input.val(), TIMEFORMAT);
-                        return m.toDate();
-                    },
-                    updateTime: function($input, dateObj){
-                        var m = moment(dateObj);
-                        $input.val(m.format(TIMEFORMAT));
-                    },
-                    parseDate: function($input){
-                        var picker = $input.data('pikaday');
-                        return picker.getDate();
-                    },
-                    updateDate: function($input, dateObj){
-                        var picker = $input.data('pikaday');
-                        return picker.setDate(dateObj);
-                    }
-                });
+                // var TIMEFORMAT = 'h:mm a';
+                // $('#alternateUiWidgetsExample').datepair({
+                //     parseTime: function($input){
+                //         // use moment.js to parse time
+                //         var m = moment($input.val(), TIMEFORMAT);
+                //         return m.toDate();
+                //     },
+                //     updateTime: function($input, dateObj){
+                //         var m = moment(dateObj);
+                //         $input.val(m.format(TIMEFORMAT));
+                //     },
+                //     parseDate: function($input){
+                //         var picker = $input.data('pikaday');
+                //         return picker.getDate();
+                //     },
+                //     updateDate: function($input, dateObj){
+                //         var picker = $input.data('pikaday');
+                //         return picker.setDate(dateObj);
+                //     }
+                // });
             </script>
         </article>
 
@@ -322,23 +325,23 @@ $('#eventsExample').datepair().on('rangeSelected', function(){
             </pre>
 
             <script>
-                $('#eventsExample .time').timepicker({
-                    'showDuration': true,
-                    'timeFormat': 'g:ia'
-                });
+                // $('#eventsExample .time').timepicker({
+                //     'showDuration': true,
+                //     'timeFormat': 'g:ia'
+                // });
 
-                $('#eventsExample .date').datepicker({
-                    'format': 'm/d/yyyy',
-                    'autoclose': true
-                });
+                // $('#eventsExample .date').datepicker({
+                //     'format': 'm/d/yyyy',
+                //     'autoclose': true
+                // });
 
-                $('#eventsExample').datepair().on('rangeSelected', function(){
-                    $('#eventsExampleStatus').text('Valid range selected');
-                }).on('rangeIncomplete', function(){
-                    $('#eventsExampleStatus').text('Incomplete range');
-                }).on('rangeError', function(){
-                    $('#eventsExampleStatus').text('Invalid range');
-                });
+                // $('#eventsExample').datepair().on('rangeSelected', function(){
+                //     $('#eventsExampleStatus').text('Valid range selected');
+                // }).on('rangeIncomplete', function(){
+                //     $('#eventsExampleStatus').text('Incomplete range');
+                // }).on('rangeError', function(){
+                //     $('#eventsExampleStatus').text('Invalid range');
+                // });
             </script>
         </article>
     </section>
