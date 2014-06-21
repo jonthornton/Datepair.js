@@ -100,6 +100,7 @@ Datepair.prototype = {
 		}
 	},
 
+	// This function will be called when passing 'this' to addEventListener
 	handleEvent: function(e){
 		// temporarily unbind the change handler to prevent triggering this
 		// if we update other inputs

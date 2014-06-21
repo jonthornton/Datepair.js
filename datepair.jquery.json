@@ -1,7 +1,7 @@
 {
 	"name": "datepair",
-	"version": "0.1.1",
-	"title": "jquery-datepair",
+	"version": "0.2.0",
+	"title": "Datepair.js",
 	"description": "A plugin for intelligently selecting date and time ranges inspired by Google Calendar.",
 	"author": {
 		"name": "Jon Thornton",
@@ -11,7 +11,7 @@
 	"licenses": [
 		{
 			"type": "MIT",
-			"url": "MIT-LICENSE.txt"
+			"url": "http://opensource.org/licenses/MIT"
 		}
 	],
 	"dependencies": {
