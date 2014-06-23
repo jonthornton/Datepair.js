@@ -202,7 +202,7 @@ Datepair.prototype = {
 			endTime = this.settings.parseTime(this.endTimeInput);
 		}
 
-		if (this.endDateInput.value && this.dateDelta + this.timeDelta < _ONE_DAY && (endTime.getTime() - startTime.getTime()) * this.timeDelta < 0) {
+		if (this.endDateInput && this.endDateInput.value && this.dateDelta + this.timeDelta < _ONE_DAY && (endTime.getTime() - startTime.getTime()) * this.timeDelta < 0) {
 			var offset = (endTime < startTime) ? _ONE_DAY : -1 * _ONE_DAY;
 			var endDate = this.settings.parseDate(this.endDateInput);
 			this.settings.updateDate(this.endDateInput, new Date(endDate.getTime() + offset));
