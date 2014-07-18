@@ -4,7 +4,7 @@
 
 Datepair.js is a lightweight, modular javascript plugin for intelligently selecting date and time ranges, inspired by Google Calendar. It will keep the start and end date/times in sync and can set default values based on user action. There are no external dependencies, however it can easily be used with jQuery or Zepto. The plugin does not provide any UI widgets; it's preconfigured to work with [jquery-timepicker](https://github.com/jonthornton/jquery-timepicker) and [Bootstrap Datepicker](https://github.com/eternicode/bootstrap-datepicker), but you can use it with any datepicker or timepicker (or none at all).
 
-*Looking for [jquery-datepicker](#jquery-plugin)? Scroll down.*
+*Looking for [jquery-datepair](#jquery-plugin)? Scroll down.*
 
 ## Requirements
 
