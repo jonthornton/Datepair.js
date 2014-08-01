@@ -25,7 +25,7 @@
 			}
 		});
 
-		return out;
+		return out || this;
 	};
 
 	//////////////

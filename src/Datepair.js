@@ -93,6 +93,29 @@ function Datepair(container, options) {
 Datepair.prototype = {
 	constructor: Datepair,
 
+	option: function(key, value)
+	{
+		if (typeof key == 'object') {
+			this.settings = simpleExtend(this.settings, key);
+
+		} else if (typeof key == 'string' && typeof value != 'undefined') {
+			this.settings[key] = value;
+
+		} else if (typeof key == 'string') {
+			return this.settings[key];
+		}
+	},
+
+	getTimeDiff: function()
+	{
+		return this.dateDelta * _ONE_DAY + this.timeDelta;
+	},
+
+	remove: function()
+	{
+		this._unbindChangeHandler()
+	},
+
 	_bindChangeHandler: function(){
 		// addEventListener doesn't work with synthetic "change" events
 		// fired by jQuery's trigger() functioin. If jQuery is present,
