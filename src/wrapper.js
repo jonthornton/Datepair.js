@@ -1,9 +1,9 @@
 (function(window, document) {
 
-    'use strict';
+	'use strict';
 
-    //= ./Datepair.js
+	//= ./Datepair.js
 
-    window.Datepair = Datepair;
+	window.Datepair = Datepair;
 
 }(window, document));
