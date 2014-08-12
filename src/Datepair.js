@@ -108,7 +108,14 @@ Datepair.prototype = {
 
 	getTimeDiff: function()
 	{
-		return this.dateDelta * _ONE_DAY + this.timeDelta;
+		// due to the fact that times can wrap around, timeDiff for any
+		// time-only pair will always be >= 0
+		var delta = this.dateDelta + this.timeDelta;
+		if (delta < 0 && (!this.startDateInput || !this.endDateInput) ) {
+			delta += _ONE_DAY
+		}
+
+		return delta;
 	},
 
 	remove: function()
@@ -174,7 +181,7 @@ Datepair.prototype = {
 					this.settings.updateDate(this.endDateInput, newEnd);
 
 				} else if (this.endDateInput.value) {
-					var endDate = this.settings.parseDate($endDateInput);
+					var endDate = this.settings.parseDate(this.endDateInput);
 					var newStart = new Date(endDate.getTime() - this.settings.defaultDateDelta * _ONE_DAY);
 					this.settings.updateDate(this.startDateInput, newStart);
 				}
@@ -269,7 +276,8 @@ Datepair.prototype = {
 			return;
 		}
 
-		if (this.dateDelta + this.timeDelta >= 0) {
+		// due to the fact that times can wrap around, any time-only pair will be considered valid
+		if (!this.startDateInput || !this.endDateInput || this.dateDelta + this.timeDelta >= 0) {
 			triggerSimpleCustomEvent(this.container, 'rangeSelected');
 		} else {
 			triggerSimpleCustomEvent(this.container, 'rangeError');
