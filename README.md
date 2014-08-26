@@ -86,6 +86,8 @@ Unbind the datepair functionality from a set of inputs.
 	```javascript
 	datepair.remove();
 	```
+- **refresh**  
+Call this method if you programmatically update the date/time fields after first initialization of datepair.  
 
 ## Events
 
@@ -108,6 +110,7 @@ Datepair.js includes an optional jQuery interface that can simplify usage when w
 $('#container').datepair(options);
 var milliseconds = $('#container').datepair('getTimeDiff');
 $('#container').datepair('remove');
+$('#container').datepair('refresh');
 ```
 
 ## Help
