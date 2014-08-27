@@ -80,12 +80,20 @@ Get the date/time range size, in milliseconds.
 	var milliseconds = datepair.getTimeDiff();
 	```
 
+- **refresh**  
+Call this method if you programmatically update the date/time fields after first initialization of datepair.  
+
+	```javascript
+	$('#someInput').val(someValue)
+	datepair.refresh();
+	```
+
 - **remove**  
-Unbind the datepair functionality from a set of inputs. 
+Unbind the datepair functionality from a set of inputs.  
 
 	```javascript
 	datepair.remove();
-	```
+	``` 
 
 ## Events
 
@@ -108,6 +116,7 @@ Datepair.js includes an optional jQuery interface that can simplify usage when w
 $('#container').datepair(options);
 var milliseconds = $('#container').datepair('getTimeDiff');
 $('#container').datepair('remove');
+$('#container').datepair('refresh');
 ```
 
 ## Help

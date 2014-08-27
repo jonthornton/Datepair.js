@@ -1,5 +1,5 @@
 /*!
- * datepair.js v0.3.0 - A javascript plugin for intelligently selecting date and time ranges inspired by Google Calendar.
+ * datepair.js v0.3.1 - A javascript plugin for intelligently selecting date and time ranges inspired by Google Calendar.
  * Copyright (c) 2014 Jon Thornton - http://jonthornton.github.com/Datepair.js
  * License: MIT
  */
@@ -85,16 +85,7 @@
 		this.endTimeInput = this.container.querySelector('.'+this.settings.endClass+'.'+this.settings.timeClass);
 	
 		// initialize date and time deltas
-		if (this.startDateInput && this.startDateInput.value && this.startDateInput && this.endDateInput.value) {
-			var startDate = this.settings.parseDate(this.startDateInput);
-			var endDate = this.settings.parseDate(this.endDateInput);
-			this.dateDelta = endDate.getTime() - startDate.getTime();
-		}
-		if (this.startTimeInput && this.startTimeInput.value && this.endTimeInput && this.endTimeInput.value) {
-			var startTime = this.settings.parseTime(this.startTimeInput);
-			var endTime = this.settings.parseTime(this.endTimeInput);
-			this.timeDelta = endTime.getTime() - startTime.getTime();
-		}
+		this.refresh()
 	
 		// init starts here
 		this._bindChangeHandler();
@@ -126,6 +117,20 @@
 			}
 	
 			return delta;
+		},
+	
+		refresh: function()
+		{
+			if (this.startDateInput && this.startDateInput.value && this.startDateInput && this.endDateInput.value) {
+				var startDate = this.settings.parseDate(this.startDateInput);
+				var endDate = this.settings.parseDate(this.endDateInput);
+				this.dateDelta = endDate.getTime() - startDate.getTime();
+			}
+			if (this.startTimeInput && this.startTimeInput.value && this.endTimeInput && this.endTimeInput.value) {
+				var startTime = this.settings.parseTime(this.startTimeInput);
+				var endTime = this.settings.parseTime(this.endTimeInput);
+				this.timeDelta = endTime.getTime() - startTime.getTime();
+			}
 		},
 	
 		remove: function()

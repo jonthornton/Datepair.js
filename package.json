@@ -2,7 +2,7 @@
     "name": "datepair.js",
     "description": "A javascript plugin for intelligently selecting date and time ranges inspired by Google Calendar.",
     "homepage": "http://jonthornton.github.com/Datepair.js",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "main": "dist/datepair.js",
     "author": {
         "name": "Jon Thornton",
@@ -15,7 +15,7 @@
     "license": "MIT",
     "devDependencies": {
         "grunt": "~0.4.1",
-        "grunt-contrib-uglify": "~0.3.0",
+        "grunt-contrib-uglify": "~0.3.1",
         "grunt-rigger": "~0.5.0",
         "grunt-contrib-watch": "~0.5.1"
     },
