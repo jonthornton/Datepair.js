@@ -52,7 +52,7 @@
         <article>
             <div class="demo">
                 <h2>Basic Example</h2>
-                <p>Datepair.js is preconfigured to work with <a href="https://github.com/jonthornton/jquery-timepicker">jquery-timepicker</a> and <a href="https://github.com/eternicode/bootstrap-datepicker">Bootstrap Datepicker</a>.</p>
+                <p>Datepair.js doesn't include any date or time picker widgets, but it's preconfigured to work with <a href="https://github.com/jonthornton/jquery-timepicker">jquery-timepicker</a> and <a href="https://github.com/eternicode/bootstrap-datepicker">Bootstrap Datepicker</a>. Include input widgets as you normally would, and then use Datepair.js to link them.</p>
 
                 <p id="basicExample">
                     <input type="text" class="date start" />
@@ -70,8 +70,12 @@
     &lt;input type="text" class="date end" /&gt;
 &lt;/p&gt;
 
+&lt;!-- include input widgets; this is independent of Datepair.js --&gt;
+&lt;link rel="styleshee" type="text/css" href="jquery.timepicker.css" /&gt;
+&lt;link rel="stylesheet" type="text/css" href="bootstrap-datepicker.css" /&gt;
 &lt;script type="text/javascript" src="bootstrap-datepicker.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript" src="jquery.timepicker.js"&gt;&lt;/script&gt;
+
 &lt;script type="text/javascript" src="datepair.js"&gt;&lt;/script&gt;
 &lt;script&gt;
     // initialize input widgets first
@@ -128,8 +132,6 @@
     &lt;input type="text" class="date end" /&gt;
 &lt;/p&gt;
 
-&lt;script type="text/javascript" src="bootstrap-datepicker.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript" src="jquery.timepicker.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript" src="datepair.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript" src="jquery.datepair.js"&gt;&lt;/script&gt;
 &lt;script&gt;
