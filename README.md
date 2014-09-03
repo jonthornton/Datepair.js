@@ -26,6 +26,10 @@ You can also install via [Bower](http://bower.io/) with `bower install datepair.
 
 ## Options
 
+- **anchor**  
+The input that will control the other input. One of `"start"`, `"end"`, or `null`. See [demo page](http://jonthornton.github.io/Datepair.js/) for more information.
+*default: "start"*
+
 - **dateClass**  
 Class name of the date inputs, if any.  
 *default: "date"*

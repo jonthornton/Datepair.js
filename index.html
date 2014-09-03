@@ -424,6 +424,60 @@ $('#eventsExample').on('rangeSelected', function(){
                 });
             </script>
         </article>
+
+        <article>
+            <div class="demo">
+                <h2>Anchor Example</h2>
+                <p>Datepair defaults to move the end time/date based on changes to the start time/date. This can be changed to the end inputs, or disabled completely.</p>
+
+                <p>Anchor:
+                    <select id="anchorSelect">
+                        <option value="start">Start</option>
+                        <option value="end">End</option>
+                        <option value="">Null</option>
+                    </select>
+                </p>
+                <p id="anchorExample">
+                    <input type="text" class="date start" />
+                    <input type="text" class="time start" /> to
+                    <input type="text" class="time end" />
+                    <input type="text" class="date end" />
+                </p>
+            </div>
+
+            <pre class="code" data-language="javascript">
+var anchorExampleEl = document.getElementById('anchorExample');
+var anchorDatepair = new Datepair(anchorExampleEl, {
+    anchor: $('#anchorSelect').val()
+});
+
+$('#anchorSelect').on('change', function(){
+    anchorDatepair.option('anchor', $('#anchorSelect').val());
+});
+            </pre>
+
+            <script>
+                $('#anchorExample .time').timepicker({
+                    'showDuration': true,
+                    'timeFormat': 'g:ia'
+                });
+
+                $('#anchorExample .date').datepicker({
+                    'format': 'm/d/yyyy',
+                    'autoclose': true
+                });
+
+                var anchorExampleEl = document.getElementById('anchorExample');
+                var anchorDatepair = new Datepair(anchorExampleEl, {
+                    anchor: $('#anchorSelect').val()
+                });
+
+                $('#anchorSelect').on('change', function(){
+                    anchorDatepair.option('anchor', $('#anchorSelect').val());
+                });
+
+            </script>
+        </article>
     </section>
 
     <section>
