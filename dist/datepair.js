@@ -1,5 +1,5 @@
 /*!
- * datepair.js v0.4.0 - A javascript plugin for intelligently selecting date and time ranges inspired by Google Calendar.
+ * datepair.js v0.4.1 - A javascript plugin for intelligently selecting date and time ranges inspired by Google Calendar.
  * Copyright (c) 2014 Jon Thornton - http://jonthornton.github.com/Datepair.js
  * License: MIT
  */
@@ -255,13 +255,10 @@
 				} else {
 					this.timeDelta = null;
 				}
-	
-				return;
 			}
 	
 			var startTime = this.settings.parseTime(this.startTimeInput);
 			var endTime = this.settings.parseTime(this.endTimeInput);
-	
 	
 			if (this.settings.anchor == 'start' && hasClass(target, this.settings.startClass)) {
 				var newTime = new Date(startTime.getTime() + this.timeDelta);

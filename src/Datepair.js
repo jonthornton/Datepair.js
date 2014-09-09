@@ -245,13 +245,10 @@ Datepair.prototype = {
 			} else {
 				this.timeDelta = null;
 			}
-
-			return;
 		}
 
 		var startTime = this.settings.parseTime(this.startTimeInput);
 		var endTime = this.settings.parseTime(this.endTimeInput);
-
 
 		if (this.settings.anchor == 'start' && hasClass(target, this.settings.startClass)) {
 			var newTime = new Date(startTime.getTime() + this.timeDelta);
