@@ -244,6 +244,7 @@ Datepair.prototype = {
 				this.timeDelta = this.settings.defaultTimeDelta;
 			} else {
 				this.timeDelta = null;
+				return;
 			}
 		}
 
