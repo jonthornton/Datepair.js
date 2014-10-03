@@ -274,9 +274,9 @@
 			var newDelta = endTime.getTime() - startTime.getTime();
 	
 			if (this.dateDelta !== null
-					&& this.dateDelta + newDelta != 0
 					&& this.dateDelta + this.timeDelta <= _ONE_DAY
-					&& newDelta * this.timeDelta <= 0) {
+					&& this.dateDelta + newDelta != 0
+					&& (newDelta >= 0 && this.timeDelta < 0) || (newDelta < 0 && this.timeDelta >= 0)) {
 				var offset = (endTime < startTime) ? _ONE_DAY : -1 * _ONE_DAY;
 				if (this.settings.anchor == 'start') {
 					var endDate = this.settings.parseDate(this.endDateInput);
