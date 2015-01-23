@@ -115,7 +115,7 @@ Datepair.prototype = {
 
 	refresh: function()
 	{
-		if (this.startDateInput && this.startDateInput.value && this.startDateInput && this.endDateInput.value) {
+		if (this.startDateInput && this.startDateInput.value && this.endDateInput && this.endDateInput.value) {
 			var startDate = this.settings.parseDate(this.startDateInput);
 			var endDate = this.settings.parseDate(this.endDateInput);
 			this.dateDelta = endDate.getTime() - startDate.getTime();
