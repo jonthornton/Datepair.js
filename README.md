@@ -123,6 +123,22 @@ $('#container').datepair('remove');
 $('#container').datepair('refresh');
 ```
 
+## jQuery-UI Datepicker
+
+By default, Datepair.js is configured to work with [Bootstrap Datepicker](https://github.com/eternicode/bootstrap-datepicker). This is different from [jQuery UI Datepicker](http://jqueryui.com/datepicker/). To use jQuery UI Datepicker, override the `parseDate` and `updateDate` methods:
+
+```javascript
+$('#some-container').datepair({
+    parseDate: function (el) {
+        var utc = new Date($(el).datepicker('getDate'));
+        return utc && new Date(utc.getTime() + (utc.getTimezoneOffset() * 60000));
+    },
+    updateDate: function (el, v) {
+        $(el).datepicker('setDate', v);
+    }
+});
+```
+
 ## Help
 
 Submit a [GitHub Issues request](https://github.com/jonthornton/Datepair.js/issues/new).
