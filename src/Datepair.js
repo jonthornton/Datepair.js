@@ -262,13 +262,14 @@ Datepair.prototype = {
 		}
 
 		var newDelta = endTime.getTime() - startTime.getTime();
+		var offset = (endTime < startTime) ? _ONE_DAY : -1 * _ONE_DAY;
 
 		if (this.dateDelta !== null
 				&& this.dateDelta + this.timeDelta <= _ONE_DAY
 				&& this.dateDelta + newDelta != 0
+				&& (offset > 0 || this.dateDelta != 0)
 				&& ((newDelta >= 0 && this.timeDelta < 0) || (newDelta < 0 && this.timeDelta >= 0))) {
 
-			var offset = (endTime < startTime) ? _ONE_DAY : -1 * _ONE_DAY;
 			if (this.settings.anchor == 'start') {
 				var endDate = this.settings.parseDate(this.endDateInput);
 				this.settings.updateDate(this.endDateInput, new Date(endDate.getTime() + offset));

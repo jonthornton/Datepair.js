@@ -1,6 +1,6 @@
 {
 	"name": "datepair",
-	"version": "0.4.5",
+	"version": "0.4.6",
 	"title": "Datepair.js",
 	"description": "A plugin for intelligently selecting date and time ranges inspired by Google Calendar.",
 	"author": {
