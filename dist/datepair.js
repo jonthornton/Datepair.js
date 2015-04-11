@@ -1,5 +1,5 @@
 /*!
- * datepair.js v0.4.6 - A javascript plugin for intelligently selecting date and time ranges inspired by Google Calendar.
+ * datepair.js v0.4.7 - A javascript plugin for intelligently selecting date and time ranges inspired by Google Calendar.
  * Copyright (c) 2015 Jon Thornton - http://jonthornton.github.com/Datepair.js
  * License: MIT
  */
@@ -128,12 +128,16 @@
 			if (this.startDateInput && this.startDateInput.value && this.endDateInput && this.endDateInput.value) {
 				var startDate = this.settings.parseDate(this.startDateInput);
 				var endDate = this.settings.parseDate(this.endDateInput);
-				this.dateDelta = endDate.getTime() - startDate.getTime();
+				if (startDate && endDate) {
+					this.dateDelta = endDate.getTime() - startDate.getTime();
+				}
 			}
 			if (this.startTimeInput && this.startTimeInput.value && this.endTimeInput && this.endTimeInput.value) {
 				var startTime = this.settings.parseTime(this.startTimeInput);
 				var endTime = this.settings.parseTime(this.endTimeInput);
-				this.timeDelta = endTime.getTime() - startTime.getTime();
+				if (startTime && endTime) {
+					this.timeDelta = endTime.getTime() - startTime.getTime();
+				}
 			}
 		},
 	
@@ -192,15 +196,16 @@
 				return
 			}
 	
-			if (!this.startDateInput.value || !this.endDateInput.value) {
+			var startDate = this.settings.parseDate(this.startDateInput);
+			var endDate = this.settings.parseDate(this.endDateInput);
+	
+			if (!startDate || !endDate) {
 				if (this.settings.defaultDateDelta !== null) {
-					if (this.startDateInput.value) {
-						var startDate = this.settings.parseDate(this.startDateInput);
+					if (startDate) {
 						var newEnd = new Date(startDate.getTime() + this.settings.defaultDateDelta * _ONE_DAY);
 						this.settings.updateDate(this.endDateInput, newEnd);
 	
-					} else if (this.endDateInput.value) {
-						var endDate = this.settings.parseDate(this.endDateInput);
+					} else if (endDate) {
 						var newStart = new Date(endDate.getTime() - this.settings.defaultDateDelta * _ONE_DAY);
 						this.settings.updateDate(this.startDateInput, newStart);
 					}
@@ -212,9 +217,6 @@
 	
 				return;
 			}
-	
-			var startDate = this.settings.parseDate(this.startDateInput);
-			var endDate = this.settings.parseDate(this.endDateInput);
 	
 			if (this.settings.anchor == 'start' && hasClass(target, this.settings.startClass)) {
 				var newDate = new Date(startDate.getTime() + this.dateDelta);
@@ -239,14 +241,15 @@
 				return
 			}
 	
-			if (!this.startTimeInput.value || !this.endTimeInput.value) {
+			var startTime = this.settings.parseTime(this.startTimeInput);
+			var endTime = this.settings.parseTime(this.endTimeInput);
+	
+			if (!startTime || !endTime) {
 				if (this.settings.defaultTimeDelta !== null) {
-					if (this.startTimeInput.value) {
-						var startTime = this.settings.parseTime(this.startTimeInput);
+					if (startTime) {
 						var newEnd = new Date(startTime.getTime() + this.settings.defaultTimeDelta);
 						this.settings.updateTime(this.endTimeInput, newEnd);
-					} else if (this.endTimeInput.value) {
-						var endTime = this.settings.parseTime(this.endTimeInput);
+					} else if (endTime) {
 						var newStart = new Date(endTime.getTime() - this.settings.defaultTimeDelta);
 						this.settings.updateTime(this.startTimeInput, newStart);
 					}
@@ -257,9 +260,6 @@
 					return;
 				}
 			}
-	
-			var startTime = this.settings.parseTime(this.startTimeInput);
-			var endTime = this.settings.parseTime(this.endTimeInput);
 	
 			if (this.settings.anchor == 'start' && hasClass(target, this.settings.startClass)) {
 				var newTime = new Date(startTime.getTime() + this.timeDelta);
