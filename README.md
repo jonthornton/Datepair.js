@@ -134,7 +134,8 @@ $('#some-container').datepair({
         return utc && new Date(utc.getTime() + (utc.getTimezoneOffset() * 60000));
     },
     updateDate: function (el, v) {
-        $(el).datepicker('setDate', v);
+	var utc = new Date();
+        $(el).datepicker('setDate', new Date(v.getTime() - (utc.getTimezoneOffset() * 60000)));
     }
 });
 ```
