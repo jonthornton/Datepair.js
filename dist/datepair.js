@@ -1,5 +1,5 @@
 /*!
- * datepair.js v0.4.7 - A javascript plugin for intelligently selecting date and time ranges inspired by Google Calendar.
+ * datepair.js v0.4.8 - A javascript plugin for intelligently selecting date and time ranges inspired by Google Calendar.
  * Copyright (c) 2015 Jon Thornton - http://jonthornton.github.com/Datepair.js
  * License: MIT
  */
@@ -70,7 +70,7 @@
 	
 			// defaults for bootstrap datepicker; override when using other input widgets
 			parseDate: function(input){
-				return jq(input).datepicker('getDate');
+				return input.value && jq(input).datepicker('getDate');
 			},
 			updateDate: function(input, dateObj){
 				jq(input).datepicker('update', dateObj);

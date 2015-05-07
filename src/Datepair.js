@@ -60,7 +60,7 @@ function Datepair(container, options) {
 
 		// defaults for bootstrap datepicker; override when using other input widgets
 		parseDate: function(input){
-			return jq(input).datepicker('getDate');
+			return input.value && jq(input).datepicker('getDate');
 		},
 		updateDate: function(input, dateObj){
 			jq(input).datepicker('update', dateObj);
