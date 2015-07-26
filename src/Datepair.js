@@ -249,38 +249,40 @@ Datepair.prototype = {
 				this.timeDelta = null;
 				return;
 			}
-		}
+		} else {
 
-		if (this.settings.anchor == 'start' && hasClass(target, this.settings.startClass)) {
-			var newTime = new Date(startTime.getTime() + this.timeDelta);
-			this.settings.updateTime(this.endTimeInput, newTime);
-			endTime = this.settings.parseTime(this.endTimeInput);
-		} else if (this.settings.anchor == 'end' && hasClass(target, this.settings.endClass)) {
-			var newTime = new Date(endTime.getTime() - this.timeDelta);
-			this.settings.updateTime(this.startTimeInput, newTime);
-			startTime = this.settings.parseTime(this.startTimeInput);
-		}
-
-		var newDelta = endTime.getTime() - startTime.getTime();
-		var offset = (endTime < startTime) ? _ONE_DAY : -1 * _ONE_DAY;
-
-		if (this.dateDelta !== null
-				&& this.dateDelta + this.timeDelta <= _ONE_DAY
-				&& this.dateDelta + newDelta != 0
-				&& (offset > 0 || this.dateDelta != 0)
-				&& ((newDelta >= 0 && this.timeDelta < 0) || (newDelta < 0 && this.timeDelta >= 0))) {
-
-			if (this.settings.anchor == 'start') {
-				var endDate = this.settings.parseDate(this.endDateInput);
-				this.settings.updateDate(this.endDateInput, new Date(endDate.getTime() + offset));
-				this._dateChanged(this.endDateInput);
-			} else if (this.settings.anchor == 'end') {
-				var startDate = this.settings.parseDate(this.startDateInput);
-				this.settings.updateDate(this.startDateInput, new Date(startDate.getTime() - offset));
-				this._dateChanged(this.startDateInput);
+			if (this.settings.anchor == 'start' && hasClass(target, this.settings.startClass)) {
+				var newTime = new Date(startTime.getTime() + this.timeDelta);
+				this.settings.updateTime(this.endTimeInput, newTime);
+				endTime = this.settings.parseTime(this.endTimeInput);
+			} else if (this.settings.anchor == 'end' && hasClass(target, this.settings.endClass)) {
+				var newTime = new Date(endTime.getTime() - this.timeDelta);
+				this.settings.updateTime(this.startTimeInput, newTime);
+				startTime = this.settings.parseTime(this.startTimeInput);
 			}
+	
+			var newDelta = endTime.getTime() - startTime.getTime();
+			var offset = (endTime < startTime) ? _ONE_DAY : -1 * _ONE_DAY;
+	
+			if (this.dateDelta !== null
+					&& this.dateDelta + this.timeDelta <= _ONE_DAY
+					&& this.dateDelta + newDelta != 0
+					&& (offset > 0 || this.dateDelta != 0)
+					&& ((newDelta >= 0 && this.timeDelta < 0) || (newDelta < 0 && this.timeDelta >= 0))) {
+	
+				if (this.settings.anchor == 'start') {
+					var endDate = this.settings.parseDate(this.endDateInput);
+					this.settings.updateDate(this.endDateInput, new Date(endDate.getTime() + offset));
+					this._dateChanged(this.endDateInput);
+				} else if (this.settings.anchor == 'end') {
+					var startDate = this.settings.parseDate(this.startDateInput);
+					this.settings.updateDate(this.startDateInput, new Date(startDate.getTime() - offset));
+					this._dateChanged(this.startDateInput);
+				}
+			}
+			this.timeDelta = newDelta;
+			
 		}
-		this.timeDelta = newDelta;
 	},
 
 	_updateEndMintime: function(){
