@@ -247,8 +247,9 @@ Datepair.prototype = {
 				this.timeDelta = this.settings.defaultTimeDelta;
 			} else {
 				this.timeDelta = null;
-				return;
 			}
+
+			return;
 		}
 
 		if (this.settings.anchor == 'start' && hasClass(target, this.settings.startClass)) {
