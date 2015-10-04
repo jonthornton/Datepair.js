@@ -260,6 +260,15 @@ Datepair.prototype = {
 			var newTime = new Date(endTime.getTime() - this.timeDelta);
 			this.settings.updateTime(this.startTimeInput, newTime);
 			startTime = this.settings.parseTime(this.startTimeInput);
+		} else {
+			if (endTime < startTime) {
+				var otherInput = hasClass(target, this.settings.startClass) ? this.endTimeInput : this.startTimeInput;
+				var selectedTime = this.settings.parseTime(target);
+				this.timeDelta = 0;
+				this.settings.updateTime(otherInput, selectedTime);
+			} else {
+				this.timeDelta = endTime.getTime() - startTime.getTime();
+			}
 		}
 
 		var newDelta = endTime.getTime() - startTime.getTime();
