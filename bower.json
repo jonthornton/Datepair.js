@@ -1,6 +1,6 @@
 {
   "name": "datepair.js",
-  "version": "0.4.10",
+  "version": "0.4.11",
   "main": ["dist/datepair.js", "dist/jquery.datepair.js"],
   "ignore": [
     "**/.*",
