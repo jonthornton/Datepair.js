@@ -174,6 +174,7 @@
 			if (hasClass(e.target, this.settings.dateClass)) {
 				if (e.target.value != '') {
 					this._dateChanged(e.target);
+					this._timeChanged(e.target);
 				} else {
 					this.dateDelta = null;
 				}
@@ -271,9 +272,12 @@
 				this.settings.updateTime(this.startTimeInput, newTime);
 				startTime = this.settings.parseTime(this.startTimeInput);
 			} else {
-				if (endTime < startTime) {
+				var startDate = this.settings.parseDate(this.startDateInput);
+				var endDate = this.settings.parseDate(this.endDateInput);
+				if ((+startDate == +endDate) && (endTime < startTime)) {
+					var thisInput  = hasClass(target, this.settings.endClass) ? this.endTimeInput : this.startTimeInput;
 					var otherInput = hasClass(target, this.settings.startClass) ? this.endTimeInput : this.startTimeInput;
-					var selectedTime = this.settings.parseTime(target);
+					var selectedTime = this.settings.parseTime(thisInput);
 					this.timeDelta = 0;
 					this.settings.updateTime(otherInput, selectedTime);
 				} else {
