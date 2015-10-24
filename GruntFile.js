@@ -33,6 +33,9 @@ module.exports = function(grunt) {
                 }
             }
         },
+        jshint: {
+            all: ['src/*.js']
+        },
 
         watch: {
             options : {
@@ -46,6 +49,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-rigger');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
     grunt.registerTask('default', ['rig', 'uglify']);
 };

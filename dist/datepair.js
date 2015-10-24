@@ -9,14 +9,14 @@
 	'use strict';
 
 	var _ONE_DAY = 86400000;
-	var jq = window.Zepto || window.jQuery
+	var jq = window.Zepto || window.jQuery;
 	
 	function simpleExtend(obj1, obj2) {
 		var out = obj2 || {};
 	
 		for (var i in obj1) {
 			if (!(i in out)) {
-				out[i] = obj1[i]
+				out[i] = obj1[i];
 			}
 		}
 	
@@ -86,7 +86,7 @@
 		this.endTimeInput = this.container.querySelector('.'+this.settings.endClass+'.'+this.settings.timeClass);
 	
 		// initialize date and time deltas
-		this.refresh()
+		this.refresh();
 		this._updateEndMintime();
 	
 		// init starts here
@@ -117,7 +117,7 @@
 			// time-only pair will always be >= 0
 			var delta = this.dateDelta + this.timeDelta;
 			if (delta < 0 && (!this.startDateInput || !this.endDateInput) ) {
-				delta += _ONE_DAY
+				delta += _ONE_DAY;
 			}
 	
 			return delta;
@@ -143,7 +143,7 @@
 	
 		remove: function()
 		{
-			this._unbindChangeHandler()
+			this._unbindChangeHandler();
 		},
 	
 		_bindChangeHandler: function(){
@@ -188,13 +188,13 @@
 			}
 	
 			this._validateRanges();
-			this._updateEndMintime()
+			this._updateEndMintime();
 			this._bindChangeHandler();
 		},
 	
 		_dateChanged: function(target){
 			if (!this.startDateInput || !this.endDateInput) {
-				return
+				return;
 			}
 	
 			var startDate = this.settings.parseDate(this.startDateInput);
@@ -239,7 +239,7 @@
 	
 		_timeChanged: function(target){
 			if (!this.startTimeInput || !this.endTimeInput) {
-				return
+				return;
 			}
 	
 			var startTime = this.settings.parseTime(this.startTimeInput);
@@ -336,7 +336,7 @@
 				triggerSimpleCustomEvent(this.container, 'rangeError');
 			}
 		}
-	}
+	};
 
 	window.Datepair = Datepair;
 
