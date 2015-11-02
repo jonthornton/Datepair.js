@@ -1,5 +1,5 @@
 /*!
- * datepair.js v0.4.11 - A javascript plugin for intelligently selecting date and time ranges inspired by Google Calendar.
+ * datepair.js v0.4.12 - A javascript plugin for intelligently selecting date and time ranges inspired by Google Calendar.
  * Copyright (c) 2015 Jon Thornton - http://jonthornton.github.com/Datepair.js
  * License: MIT
  */
@@ -267,11 +267,17 @@
 				var newTime = new Date(startTime.getTime() + this.timeDelta);
 				this.settings.updateTime(this.endTimeInput, newTime);
 				endTime = this.settings.parseTime(this.endTimeInput);
+	
+				this._doMidnightRollover(startTime, endTime);
 			} else if (this.settings.anchor == 'end' && hasClass(target, this.settings.endClass)) {
 				var newTime = new Date(endTime.getTime() - this.timeDelta);
 				this.settings.updateTime(this.startTimeInput, newTime);
 				startTime = this.settings.parseTime(this.startTimeInput);
+	
+				this._doMidnightRollover(startTime, endTime);
 			} else {
+				this._doMidnightRollover(startTime, endTime);
+	
 				var startDate = this.settings.parseDate(this.startDateInput);
 				var endDate = this.settings.parseDate(this.endDateInput);
 				if ((+startDate == +endDate) && (endTime < startTime)) {
@@ -285,6 +291,12 @@
 				}
 			}
 	
+	
+		},
+	
+		_doMidnightRollover: function(startTime, endTime) {
+			var endDate = this.settings.parseDate(this.endDateInput);
+			var startDate = this.settings.parseDate(this.startDateInput);
 			var newDelta = endTime.getTime() - startTime.getTime();
 			var offset = (endTime < startTime) ? _ONE_DAY : -1 * _ONE_DAY;
 	
@@ -295,11 +307,9 @@
 					&& ((newDelta >= 0 && this.timeDelta < 0) || (newDelta < 0 && this.timeDelta >= 0))) {
 	
 				if (this.settings.anchor == 'start') {
-					var endDate = this.settings.parseDate(this.endDateInput);
 					this.settings.updateDate(this.endDateInput, new Date(endDate.getTime() + offset));
 					this._dateChanged(this.endDateInput);
 				} else if (this.settings.anchor == 'end') {
-					var startDate = this.settings.parseDate(this.startDateInput);
 					this.settings.updateDate(this.startDateInput, new Date(startDate.getTime() - offset));
 					this._dateChanged(this.startDateInput);
 				}
