@@ -268,8 +268,12 @@ Datepair.prototype = {
 		} else {
 			this._doMidnightRollover(startTime, endTime);
 
-			var startDate = this.settings.parseDate(this.startDateInput);
-			var endDate = this.settings.parseDate(this.endDateInput);
+			var startDate, endDate;
+			if (this.startDateInput && this.endDateInput) {
+				startDate = this.settings.parseDate(this.startDateInput);
+				endDate = this.settings.parseDate(this.endDateInput);
+			}
+
 			if ((+startDate == +endDate) && (endTime < startTime)) {
 				var thisInput  = hasClass(target, this.settings.endClass) ? this.endTimeInput : this.startTimeInput;
 				var otherInput = hasClass(target, this.settings.startClass) ? this.endTimeInput : this.startTimeInput;
@@ -285,6 +289,10 @@ Datepair.prototype = {
 	},
 
 	_doMidnightRollover: function(startTime, endTime) {
+		if (!this.startDateInput || !this.endDateInput) {
+			return;
+		}
+
 		var endDate = this.settings.parseDate(this.endDateInput);
 		var startDate = this.settings.parseDate(this.startDateInput);
 		var newDelta = endTime.getTime() - startTime.getTime();

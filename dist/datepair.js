@@ -1,5 +1,5 @@
 /*!
- * datepair.js v0.4.12 - A javascript plugin for intelligently selecting date and time ranges inspired by Google Calendar.
+ * datepair.js v0.4.13 - A javascript plugin for intelligently selecting date and time ranges inspired by Google Calendar.
  * Copyright (c) 2015 Jon Thornton - http://jonthornton.github.com/Datepair.js
  * License: MIT
  */
@@ -278,8 +278,12 @@
 			} else {
 				this._doMidnightRollover(startTime, endTime);
 	
-				var startDate = this.settings.parseDate(this.startDateInput);
-				var endDate = this.settings.parseDate(this.endDateInput);
+				var startDate, endDate;
+				if (this.startDateInput && this.endDateInput) {
+					startDate = this.settings.parseDate(this.startDateInput);
+					endDate = this.settings.parseDate(this.endDateInput);
+				}
+	
 				if ((+startDate == +endDate) && (endTime < startTime)) {
 					var thisInput  = hasClass(target, this.settings.endClass) ? this.endTimeInput : this.startTimeInput;
 					var otherInput = hasClass(target, this.settings.startClass) ? this.endTimeInput : this.startTimeInput;
@@ -295,6 +299,10 @@
 		},
 	
 		_doMidnightRollover: function(startTime, endTime) {
+			if (!this.startDateInput || !this.endDateInput) {
+				return;
+			}
+	
 			var endDate = this.settings.parseDate(this.endDateInput);
 			var startDate = this.settings.parseDate(this.startDateInput);
 			var newDelta = endTime.getTime() - startTime.getTime();
