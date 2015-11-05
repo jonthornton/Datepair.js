@@ -146,9 +146,11 @@ Submit a [GitHub Issues request](https://github.com/jonthornton/Datepair.js/issu
 
 ## Development Guidelines
 
-1. Install dependencies (grunt) `npm install`
-2. To build and minify, run `grunt`
-3. Use `grunt watch` to continuously build while developing
+* Install dependencies (grunt) `npm install`
+* To build and minify, run `grunt`
+* Use `grunt watch` to continuously build while developing
+
+Datepair.js follows [semantic versioning](http://semver.org/).
 
 - - -
 
