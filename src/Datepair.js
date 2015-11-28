@@ -77,7 +77,6 @@ function Datepair(container, options) {
 
 	// initialize date and time deltas
 	this.refresh();
-	this._updateEndMintime();
 
 	// init starts here
 	this._bindChangeHandler();
@@ -127,6 +126,7 @@ Datepair.prototype = {
 			var endTime = this.settings.parseTime(this.endTimeInput);
 			if (startTime && endTime) {
 				this.timeDelta = endTime.getTime() - startTime.getTime();
+				this._updateEndMintime();
 			}
 		}
 	},
