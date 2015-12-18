@@ -26,88 +26,88 @@ You can also install via [Bower](http://bower.io/) with `bower install datepair.
 
 ## Options
 
-- **anchor**  
+- **anchor**
 The input that will control the other input. One of `"start"`, `"end"`, or `null`. See [demo page](http://jonthornton.github.io/Datepair.js/) for more information.
 *default: "start"*
 
-- **dateClass**  
-Class name of the date inputs, if any.  
+- **dateClass**
+Class name of the date inputs, if any.
 *default: "date"*
 
-- **defaultDateDelta**  
-Fill in the second date value with the specified range when the users selects the first date. Value is in days. Set this to ```null``` to disable automatically setting the second date.  
+- **defaultDateDelta**
+Fill in the second date value with the specified range when the users selects the first date. Value is in days. Set this to ```null``` to disable automatically setting the second date.
 *default: 0*
 
-- **defaultTimeDelta**  
-Fill in the second time value with the specified range when the users selects the first time. Value is in milliseconds; set this to ```7200000``` for a 2 hour range, for example. Set this to ```null``` to disable automatically setting the second time.  
+- **defaultTimeDelta**
+Fill in the second time value with the specified range when the users selects the first time. Value is in milliseconds; set this to ```7200000``` for a 2 hour range, for example. Set this to ```null``` to disable automatically setting the second time.
 *default: 0*
 
-- **endClass**  
-Class name of the range end input(s).  
+- **endClass**
+Class name of the range end input(s).
 *default: "end"*
 
-- **parseDate**  
-A function that takes a jQuery element for a date input and returns a local time ```Date``` object representing the date input value.  
+- **parseDate**
+A function that takes a jQuery element for a date input and returns a local time ```Date``` object representing the date input value.
 *default: function for [Bootstrap Datepicker](https://github.com/eternicode/bootstrap-datepicker)*
 
-- **parseTime**  
-A function that takes a jQuery element for a time input and returns a local time ```Date``` object representing the time input value. See [example page](http://jonthornton.github.com/Datepair.js) for more info.  
+- **parseTime**
+A function that takes a jQuery element for a time input and returns a local time ```Date``` object representing the time input value. See [example page](http://jonthornton.github.com/Datepair.js) for more info.
 *default: function for [jquery-timepicker](https://github.com/jonthornton/jquery-timepicker)*
 
-- **setMinTime**  
-A function that takes a jQuery element for a time input and a local time ```Date``` object representing the time, and sets the timepicker minTime value.  
+- **setMinTime**
+A function that takes a jQuery element for a time input and a local time ```Date``` object representing the time, and sets the timepicker minTime value.
 *default: function for [jquery-timepicker](https://github.com/jonthornton/jquery-timepicker)*
 
-- **startClass**  
-Class name of the range start input(s).  
+- **startClass**
+Class name of the range start input(s).
 *default: "start"*
 
-- **timeClass**  
-Class name of the time inputs, if any.  
+- **timeClass**
+Class name of the time inputs, if any.
 *default: "time"*
 
-- **updateDate**  
-A function that takes a jQuery element for a date input and a local time ```Date``` object representing the date, and sets the input value.  
+- **updateDate**
+A function that takes a jQuery element for a date input and a local time ```Date``` object representing the date, and sets the input value.
 *default: function for [Bootstrap Datepicker](https://github.com/eternicode/bootstrap-datepicker)*
 
-- **updateTime**  
-A function that takes a jQuery element for a time input and a local time ```Date``` object representing the time, and sets the input value.  
+- **updateTime**
+A function that takes a jQuery element for a time input and a local time ```Date``` object representing the time, and sets the input value.
 *default: function for [jquery-timepicker](https://github.com/jonthornton/jquery-timepicker)*
 
 
 ## Methods
 
-- **getTimeDiff**  
+- **getTimeDiff**
 Get the date/time range size, in milliseconds.
 
 	```javascript
 	var milliseconds = datepair.getTimeDiff();
 	```
 
-- **refresh**  
-Call this method if you programmatically update the date/time fields after first initialization of datepair.  
+- **refresh**
+Call this method if you programmatically update the date/time fields after first initialization of datepair.
 
 	```javascript
 	$('#someInput').val(someValue)
 	datepair.refresh();
 	```
 
-- **remove**  
-Unbind the datepair functionality from a set of inputs.  
+- **remove**
+Unbind the datepair functionality from a set of inputs.
 
 	```javascript
 	datepair.remove();
-	``` 
+	```
 
 ## Events
 
-- **rangeError**  
+- **rangeError**
 Fired after the user interacts with the datepair inputs but selects an invalid range, where the end time/date is before the start.
 
-- **rangeIncomplete**  
+- **rangeIncomplete**
 Fired after the user interacts with the datepair inputs but one or more empty inputs remain. Unpaired inputs (such as a start date with no corresponding end date) will not be taken into account.
 
-- **rangeSelected**  
+- **rangeSelected**
 Fired after the user interacts with the datepair inputs and all paired inputs have valid values.
 
 ## jQuery Plugin
@@ -135,7 +135,7 @@ $('#some-container').datepair({
     },
     updateDate: function (el, v) {
         var utc = new Date();
-        $(el).datepicker('setDate', new Date(v.getTime() - (utc.getTimezoneOffset() * 60000)));
+        $(el).datepicker('setDate', new Date(v.getTime() - (v.getTimezoneOffset() * 60000)));
     }
 });
 ```
