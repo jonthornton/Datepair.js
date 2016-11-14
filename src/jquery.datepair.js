@@ -20,6 +20,11 @@
 				$this.data('datepair', data);
 			}
 
+			if (option === 'remove') {
+				out = data['remove']();
+				$this.removeData('datepair', data);
+			}
+
 			if (typeof option === 'string') {
 				out = data[option]();
 			}
