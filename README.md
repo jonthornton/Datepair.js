@@ -130,7 +130,11 @@ By default, Datepair.js is configured to work with [Bootstrap Datepicker](https:
 ```javascript
 $('#some-container').datepair({
     parseDate: function (el) {
-        var utc = new Date($(el).datepicker('getDate'));
+        var val = $(el).datepicker('getDate');
+        if (!val) {
+            return null;
+        }
+        var utc = new Date(val);
         return utc && new Date(utc.getTime() + (utc.getTimezoneOffset() * 60000));
     },
     updateDate: function (el, v) {
