@@ -20,9 +20,9 @@ var container = document.getElementById('container')
 var datepair = new Datepair(container, options);
 ```
 
-Where ```#container``` contains time/date input elements with the appropriate class names. ```options``` is an optional javascript object with parameters explained below.
+Where `#container` contains time/date `<input />` elements with the appropriate class names. `options` is an optional javascript object with parameters explained below.
 
-You can also install via [Bower](http://bower.io/) with `bower install datepair.js`.
+Note that Datepair is triggered by `change` events and won't work unless the container has some `<input />` elements.
 
 ## Options
 
@@ -142,6 +142,10 @@ $('#some-container').datepair({
     }
 });
 ```
+
+## Packaging
+
+Install via [Bower](http://bower.io/) with `bower install datepair.js`.
 
 ## Help
 
