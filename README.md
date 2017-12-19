@@ -145,7 +145,8 @@ $('#some-container').datepair({
 
 ## Packaging
 
-Install via [Bower](http://bower.io/) with `bower install datepair.js`.
+https://www.npmjs.com/package/datepair.js  
+`npm install --save datepair.js`
 
 ## Help
 
