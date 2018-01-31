@@ -237,15 +237,15 @@ Datepair.prototype = {
 
 		if (!startTime || !endTime) {
 			if (this.settings.defaultTimeDelta !== null) {
-				if (startTime) {
-					var newEnd = new Date(startTime.getTime() + this.settings.defaultTimeDelta);
-					this.settings.updateTime(this.endTimeInput, newEnd);
-				} else if (endTime) {
-					var newStart = new Date(endTime.getTime() - this.settings.defaultTimeDelta);
-					this.settings.updateTime(this.startTimeInput, newStart);
-				}
-
 				this.timeDelta = this.settings.defaultTimeDelta;
+
+				if (startTime) {
+					endTime = this._setTimeAndReturn(this.endTimeInput, new Date(startTime.getTime() + this.settings.defaultTimeDelta));
+					this._doMidnightRollover(startTime, endTime);
+				} else if (endTime) {
+					startTime = this._setTimeAndReturn(this.startTimeInput, new Date(endTime.getTime() - this.settings.defaultTimeDelta));
+					this._doMidnightRollover(startTime, endTime);
+				}
 			} else {
 				this.timeDelta = null;
 			}
@@ -254,16 +254,10 @@ Datepair.prototype = {
 		}
 
 		if (this.settings.anchor == 'start' && hasClass(target, this.settings.startClass)) {
-			var newTime = new Date(startTime.getTime() + this.timeDelta);
-			this.settings.updateTime(this.endTimeInput, newTime);
-			endTime = this.settings.parseTime(this.endTimeInput);
-
+			endTime = this._setTimeAndReturn(this.endTimeInput, new Date(startTime.getTime() + this.timeDelta));
 			this._doMidnightRollover(startTime, endTime);
 		} else if (this.settings.anchor == 'end' && hasClass(target, this.settings.endClass)) {
-			var newTime = new Date(endTime.getTime() - this.timeDelta);
-			this.settings.updateTime(this.startTimeInput, newTime);
-			startTime = this.settings.parseTime(this.startTimeInput);
-
+			startTime = this._setTimeAndReturn(this.startTimeInput, new Date(endTime.getTime() - this.timeDelta));
 			this._doMidnightRollover(startTime, endTime);
 		} else {
 			this._doMidnightRollover(startTime, endTime);
@@ -286,6 +280,11 @@ Datepair.prototype = {
 		}
 
 
+	},
+
+	_setTimeAndReturn: function(input, newTime) {
+		this.settings.updateTime(input, newTime);
+		return this.settings.parseTime(input);
 	},
 
 	_doMidnightRollover: function(startTime, endTime) {

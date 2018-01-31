@@ -24,7 +24,7 @@ module.exports = function(grunt) {
         uglify: {
             options: {
                 banner: '<%= meta.banner %>',
-                report: 'gzip'
+                report: 'min'
             },
             dist: {
                 files: {
