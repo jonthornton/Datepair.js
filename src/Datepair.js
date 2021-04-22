@@ -209,6 +209,11 @@ Datepair.prototype = {
 			return;
 		}
 
+		if (Math.abs(endDate.getFullYear() - startDate.getFullYear()) > 1000) {
+			console.log('here')
+			return;
+		}
+
 		if (this.settings.anchor == 'start' && hasClass(target, this.settings.startClass)) {
 			var newDate = new Date(startDate.getTime() + this.dateDelta);
 			this.settings.updateDate(this.endDateInput, newDate);
