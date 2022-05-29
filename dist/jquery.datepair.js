@@ -1,51 +1,55 @@
 /*!
- * datepair.js v0.4.17 - A javascript plugin for intelligently selecting date and time ranges inspired by Google Calendar.
- * Copyright (c) 2021 Jon Thornton - http://jonthornton.github.com/Datepair.js
+ * datepair.js v0.4.18 - A javascript plugin for intelligently selecting date and time ranges inspired by Google Calendar.
+ * Copyright (c) 2022 Jon Thornton - http://jonthornton.github.com/Datepair.js
  * License: MIT
  */
+(function () {
+	'use strict';
 
-(function($) {
+	(function($) {
 
-	if(!$) {
-		return;
-	}
+		if(!$) {
+			return;
+		}
 
-	////////////
-	// Plugin //
-	////////////
+		////////////
+		// Plugin //
+		////////////
 
-	$.fn.datepair = function(option) {
-		var out;
-		this.each(function() {
+		$.fn.datepair = function(option) {
+			var out;
+			this.each(function() {
+				var $this = $(this);
+				var data = $this.data('datepair');
+				var options = typeof option === 'object' && option;
+
+				if (!data) {
+					data = new Datepair(this, options);
+					$this.data('datepair', data);
+				}
+
+				if (option === 'remove') {
+					out = data['remove']();
+					$this.removeData('datepair', data);
+				}
+
+				if (typeof option === 'string') {
+					out = data[option]();
+				}
+			});
+
+			return out || this;
+		};
+
+		//////////////
+		// Data API //
+		//////////////
+
+		$('[data-datepair]').each(function() {
 			var $this = $(this);
-			var data = $this.data('datepair');
-			var options = typeof option === 'object' && option;
-
-			if (!data) {
-				data = new Datepair(this, options);
-				$this.data('datepair', data);
-			}
-
-			if (option === 'remove') {
-				out = data['remove']();
-				$this.removeData('datepair', data);
-			}
-
-			if (typeof option === 'string') {
-				out = data[option]();
-			}
+			$this.datepair($this.data());
 		});
 
-		return out || this;
-	};
+	}(window.Zepto || window.jQuery));
 
-	//////////////
-	// Data API //
-	//////////////
-
-	$('[data-datepair]').each(function() {
-		var $this = $(this);
-		$this.datepair($this.data());
-	});
-
-}(window.Zepto || window.jQuery));
+})();

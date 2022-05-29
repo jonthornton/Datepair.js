@@ -349,3 +349,5 @@ Datepair.prototype = {
 		}
 	}
 };
+
+export default Datepair;

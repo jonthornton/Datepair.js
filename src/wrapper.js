@@ -1,8 +1,8 @@
+import Datepair from "./Datepair.js";
+
 (function(window, document) {
 
 	'use strict';
-
-	//= ./Datepair.js
 
 	window.Datepair = Datepair;
 
