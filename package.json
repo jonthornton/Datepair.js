@@ -2,11 +2,14 @@
     "name": "datepair.js",
     "description": "A javascript plugin for intelligently selecting date and time ranges inspired by Google Calendar.",
     "homepage": "http://jonthornton.github.com/Datepair.js",
-    "version": "0.4.17",
+    "version": "0.4.18",
     "main": "dist/datepair.js",
     "author": {
         "name": "Jon Thornton",
         "url": "https://github.com/jonthornton"
+    },
+    "scripts": {
+        "format": "prettier-eslint --write \"src/**/*.js\""
     },
     "repository": {
         "type" : "git",
@@ -14,11 +17,8 @@
     },
     "license": "MIT",
     "devDependencies": {
-        "grunt": "~1.5.3",
-        "grunt-contrib-uglify": "~0.4.0",
-        "grunt-rigger": "~0.5.0",
-        "grunt-contrib-jshint": "^0.11.3",
-        "grunt-contrib-watch": "~0.5.1"
+        "prettier-eslint": "^9.0.2",
+        "prettier-eslint-cli": "^5.0.0"
     },
     "keywords": [ "timepicker", "datepicker", "time", "date", "picker", "ui", "calendar", "input", "form" ]
 }
