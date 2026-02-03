@@ -141,7 +141,7 @@ Datepair.prototype = {
 		// fired by jQuery's trigger() functioin. If jQuery is present,
 		// use that for event binding
 		if (jq) {
-			jq(this.container).on('change.datepair', jq.proxy(this.handleEvent, this));
+			jq(this.container).on('change.datepair', this.handleEvent.bind(this));
 		} else {
 			this.container.addEventListener('change', this, false);
 		}
